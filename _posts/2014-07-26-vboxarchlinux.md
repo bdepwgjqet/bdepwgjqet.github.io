@@ -36,9 +36,11 @@ tags: [vbox, archlinux]
 ##3.3 挂载安装
 ###3.3.1 键盘布局
 - 默认就是us(美式键盘)，可以不用改。如果要更改可以使用命令:
+>
 {% highlight bash %}
 # loadkeys layout
 {% endhighlight %}
+
 - 把layout换成键盘布局，如fr,uk等。
 
 ---
