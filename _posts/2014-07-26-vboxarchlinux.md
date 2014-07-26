@@ -21,7 +21,7 @@ tags: [vbox, archlinux]
 >Failed to install NtCreateSection monitor:e9 bb eb ....
 >(rc=-8)
 
-- 不知道是不是bug，我的系统是win7 64bit，认裁= =
+- 不知道是不是bug，我的系统是win7 64bit，认栽= =
 - 试了几种版本后发现改成4.3.12版本才是正确的姿势。
 
 ---
@@ -208,11 +208,11 @@ feh --bg-scale /path/to/image.file &
 ##4.3 fcitx
 
 - 安装fcitx-im,fcitx-configtool,fcitx-table-extra，设置环境变量，在~/.xinitrc中加入：
->export GTK_IM_MODULE=xim
->export QT_IM_MODULE=xim
->export XMODIFIERS="@im=fcitx"
+>export GTK_IM_MODULE=xim  
+>export QT_IM_MODULE=xim  
+>export XMODIFIERS="@im=fcitx"  
 
 - 启动fcitx-configtool设置输入法以及快捷键。
-- 注意： export环境变量应该放在exec执行openbox之前。如果fcitx还是无法启动，执行fcitx-diagnose排查错误。
+- 注意： export环境变量应该放在exec执行openbox之前，否则openbox没有export环境变量。如果fcitx还是无法启动，执行fcitx-diagnose排查错误。
 
 ---
