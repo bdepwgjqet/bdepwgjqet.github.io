@@ -7,6 +7,36 @@ tags: [vbox, archlinux]
 ---
 {% include JB/setup %}
 
+- [1. 废话](#1-废话)
+  - [](#)
+- [2. 安装vbox](#2-安装vbox)
+  - [](#-1)
+- [3. 安装arch](#3-安装arch)
+  - [3.1 下载镜像](#31-下载镜像)
+  - [3.2 分配虚拟电脑](#32-分配虚拟电脑)
+  - [3.3 挂载安装](#33-挂载安装)
+    - [3.3.1 键盘布局](#331-键盘布局)
+- [loadkeys layout](#loadkeys-layout)
+  - [](#-2)
+    - [3.3.3 格式化](#333-格式化)
+- [mkfs -t ext4 /dev/partition](#mkfs--t-ext4-devpartition)
+- [mkdir /mnt/home](#mkdir-mnthome)
+- [mount /dev/sda2 /mnt/home](#mount-devsda2-mnthome)
+    - [3.3.7 配置系统](#337-配置系统)
+- [genfstab -p /mnt >> /mnt/etc/fstab](#genfstab--p-mnt--mntetcfstab)
+- [ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime](#ln--s-usrsharezoneinfoasiashanghai-etclocaltime)
+    - [3.3.8 安装Syslinux](#338-安装syslinux)
+- [pacman -S gptfdisk](#pacman--s-gptfdisk)
+- [...](#)
+- [APPEND root=/dev/sda1 rw](#append-root=devsda1-rw)
+- [systemctl --failed](#systemctl---failed)
+- [VBoxClient-all &](#vboxclient-all-&)
+  - [4.2 openbox](#42-openbox)
+- [mkdir -p ~/.config/openbox](#mkdir--p-~configopenbox)
+- [sudo cp /etc/xdg/openbox/{rc.xml,menu.xml,autostart,environment} ~/.config/openbox](#sudo-cp-etcxdgopenboxrcxmlmenuxmlautostartenvironment-~configopenbox)
+- [sudo systemctl enable slim.service](#sudo-systemctl-enable-slimservice)
+  - [4.3 fcitx](#43-fcitx)
+  - [](#-3)
 
 #1. 废话
 - 最近发现脑容量有点不够用，于是准备用 __jekyll+github+vim+markdown__的方式写（做）博（笔）客（记）。
