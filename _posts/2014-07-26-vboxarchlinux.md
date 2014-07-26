@@ -46,29 +46,29 @@ tags: [vbox, archlinux]
 ---
 ###3.3.2 分区
 - 用gdisk工具分区，根目录3G，home目录5G：
-{% highlight bash %}
+  ```bash
 # gdisk disk-device
-{% endhighlight %}
+```
 
 ###3.3.3 格式化
 - 用以下命令格式化分区:
-{% highlight bash %}
+  ```bash
 # mkfs -t ext4 /dev/partition
-{% endhighlight %}
+```
 
 ###3.3.4 网络
 - 使用vbox的NAT模式，因此网格不用考虑。
 
 ###3.3.5 挂载分区
 - 先将根目录挂载:
-{% highlight bash %}
+  ```bash
 # mount /dev/sda1 /mnt
-{% endhighlight %}
-再挂hmoe目录:
-{% highlight bash %}
+```
+- 再挂hmoe目录:
+  ```bash
 # mkdir /mnt/home
 # mount /dev/sda2 /mnt/home
-{% endhighlight %}
+```
 - 如果有boot是单独分区也要挂载。
 
 ###3.3.6 安装基本系统
@@ -79,53 +79,53 @@ tags: [vbox, archlinux]
 > Server = http://cosmos.cites.illinois.edu/pub/archlinux/$repo/os/$arch  
 
 - 用pacstrap安装:
-{% highlight bash %}
+  ```bash
 # pacstrap /mnt base
-{% endhighlight %}
+```
 
 ###3.3.7 配置系统 
 - 用下面命令生成fstab：
-{% highlight bash %}
+  ```bash
 # genfstab -p /mnt >> /mnt/etc/fstab
-{% endhighlight %}
+```
 
 - chroot到新系统中：
-{% highlight bash %}
+  ```bash
 # arch-chroot /mnt
-{% endhighlight %}
+```
 
 - 在 __etc/hostname__中添加主机名
 - 建立时区：
-{% highlight bash %}
+  ```bash
 # ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-{% endhighlight %}
+```
 
 - 取消 __etc/locale.gen__中 __zh_CN.UTF-8 UTF-8__的注释，执行 __locale-gen__生成lcoale信息
 - 在 __etc/locale.conf__中设置语言，例如：
-{% highlight bash %}
+  ```bash
 LANG=en_US.UTF-8
-{% endhighlight %}
+```
 
 - 执行 __passwd__设置密码
 
 ###3.3.8 安装Syslinux
 - 刚开始安装Grub，装完后重启发现没网，不知道是哪坑了，于是换Syslinux。
 - 由于是GPT，先安装gptfdisk
-{% highlight bash %}
+  ```bash
 # pacman -S gptfdisk
-{% endhighlight %}
+```
 
 - 再安装syslinux:
-{% highlight bash %}
+  ```bash
 # pacman -S syslinux
 # syslinux-install_update -iam
-{% endhighlight %}
+```
 
 - 编缉 __boot/syslinux/syslinux.cfg__将 __/__指向正确根分区：
-{% highlight bash %}
+  ```bash
 # ...
 # APPEND root=/dev/sda1 rw
-{% endhighlight %}
+```
 
 - __reboot__
 
