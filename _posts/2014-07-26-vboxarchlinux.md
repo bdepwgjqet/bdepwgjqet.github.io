@@ -119,7 +119,7 @@ LANG=en_US.UTF-8
 # syslinux-install_update -iam
 {% endhighlight %}
 
-- 编缉__boot/syslinux/syslinux.cfg__将__/__指向正确根分区：
+- 编缉 __boot/syslinux/syslinux.cfg__ 将__/__指向正确根分区：
 {% highlight bash %}
 # ...
 # APPEND root=/dev/sda1 rw
