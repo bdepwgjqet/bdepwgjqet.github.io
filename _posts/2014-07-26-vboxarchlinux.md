@@ -10,7 +10,10 @@ tags: [vbox, archlinux]
 * This will become a table of contents (this text will be scraped).
 {:toc}
 
+[TOC]
+
 #h1
 ##h2
 ##h3
 #h22
+[abc]
