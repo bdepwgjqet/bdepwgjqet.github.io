@@ -7,13 +7,11 @@ tags: [vbox, archlinux]
 ---
 {% include JB/setup %}
 
-* This will become a table of contents (this text will be scraped).
-{:toc}
 
-[TOC]
+<div>{{ content | toc_generate }}</div>
 
 #h1
 ##h2
+###hhhhhhhhhh
 ##h3
 #h22
-[abc]
