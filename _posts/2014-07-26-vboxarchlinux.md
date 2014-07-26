@@ -8,21 +8,37 @@ tags: [vbox, archlinux]
 {% include JB/setup %}
 
   - [tags: [vbox, archlinux]](#tags-vbox-archlinux)
-- [h1](#h1)
-  - [h2](#h2)
-    - [hhhhhhhhhh](#hhhhhhhhhh)
-  - [h3](#h3)
-- [h22](#h22)
+- [1. 废话](#1-废话)
+  - [](#)
+- [2. 安装vbox](#2-安装vbox)
+  - [](#-1)
+- [3. 安装arch](#3-安装arch)
+  - [](#-2)
+- [4. 配置](#4-配置)
+  - [4.1. vbox相关](#41-vbox相关)
+  - [4.2. openbox](#42-openbox)
+  - [4.3. fcitx](#43-fcitx)
+  - [](#-3)
 
 
-<div>{{ content | toc_generate }}</div>
+#1. 废话
 
-<script>$('#main_content').toc();</script>
+---
 
-$('#main_content').toc();
+#2. 安装vbox
 
-#h1
-##h2
-###hhhhhhhhhh
-##h3
-#h22
+---
+
+#3. 安装arch
+
+---
+
+#4. 配置
+
+##4.1. vbox相关
+
+##4.2. openbox
+
+##4.3. fcitx
+
+---
