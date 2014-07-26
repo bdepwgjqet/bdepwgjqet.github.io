@@ -26,20 +26,20 @@ tags: [vbox, archlinux]
 
 ---
 
-# 3. 安装arch
-## 3.1 下载镜像
+#3. 安装arch
+##3.1 下载镜像
 - 在[Archlinux官网](https://www.archlinux.org/download/)下载最新镜像。
 
-## 3.2 分配虚拟电脑
+##3.2 分配虚拟电脑
 - 在Vbox新建一个虚拟电脑，分配空间等等，公司配的电脑是128G ssd，这里给分配了8G。
 
-## 3.3 挂载安装
-### 3.3.1 键盘布局
+##3.3 挂载安装
+###3.3.1 键盘布局
 - 默认就是us(美式键盘)，可以不用改。如果要更改可以使用命令:
 
-{% highlight bash %}
- # loadkeys layout
-{% endhighlight %}
+- ```bash
+# loadkeys layout
+```
 
 - 把layout换成键盘布局，如fr,uk等。
 
@@ -64,7 +64,7 @@ tags: [vbox, archlinux]
 {% highlight bash %}
 # mount /dev/sda1 /mnt
 {% endhighlight %}
-- 再挂hmoe目录:
+再挂hmoe目录:
 {% highlight bash %}
 # mkdir /mnt/home
 # mount /dev/sda2 /mnt/home
