@@ -10,6 +10,10 @@ tags: [vbox, archlinux]
 
 <div>{{ content | toc_generate }}</div>
 
+<script>$('#main_content').toc();</script>
+
+$('#main_content').toc();
+
 #h1
 ##h2
 ###hhhhhhhhhh
