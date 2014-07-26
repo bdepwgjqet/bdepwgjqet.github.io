@@ -9,7 +9,7 @@ tags: [vbox, archlinux]
 
 
 #1. 废话
-- 最近发现脑容量有点不够用，于是准备用__jekyll+github+vim+markdown__的方式写（做）博（笔）客（记）。
+- 最近发现脑容量有点不够用，于是准备用 __jekyll+github+vim+markdown__的方式写（做）博（笔）客（记）。
 - 公司发的电脑预装win7系统，各种不习惯，而且cygwin带各种坑。本着不作死就不会死的心态，准备装个__vbox+archlinux__
 
 ---
@@ -36,10 +36,10 @@ tags: [vbox, archlinux]
 ##3.3 挂载安装
 ###3.3.1 键盘布局
 - 默认就是us(美式键盘)，可以不用改。如果要更改可以使用命令:
->
-{% highlight bash %}
-# loadkeys layout
-{% endhighlight %}
+
+>{% highlight bash %}
+># loadkeys layout
+>{% endhighlight %}
 
 - 把layout换成键盘布局，如fr,uk等。
 
