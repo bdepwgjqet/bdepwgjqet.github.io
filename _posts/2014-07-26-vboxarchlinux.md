@@ -27,6 +27,10 @@ tags: [vbox, archlinux]
   - [4.2 openbox](#42-openbox)
   - [4.3 fcitx](#43-fcitx)
 
+---
+
+
+
 #1. 废话
 - 最近发现脑容量有点不够用，于是准备用 __jekyll+github+vim+markdown__的方式写（做）博（笔）客（记）。
 - 公司发的电脑预装win7系统，各种不习惯，而且cygwin带各种坑。本着不作死就不会死的心态，准备搞个 __vbox+archlinux__。
