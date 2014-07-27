@@ -63,10 +63,8 @@ tags: [vbox, archlinux]
   ```bash
 # loadkeys layout
 ```
-   { % highlight ruby linenos % }
-def foo
-	puts 'foo'
-end
+{ % highlight bash linenos % }
+# loadkeys layout
 { % endhighlight % }
 
 
