@@ -74,7 +74,7 @@ Github Pages使用[Jekyll](http://jekyllrb.com/)模板系梳，只能静态页�
 简要说明:
 
 - **_config.yml**：配置文件，用来配置基本的信息（例如所用的标记语言）以及定义效果。
-- **_includes**：用来存放需要被反复调用的文件，可以通过 **\{\% include file.html \%\}**来调用flie.html文件。
+- **_includes**：用来存放需要被反复调用的文件，可以通过 **\{% include file.html %\}**来调用flie.html文件。
 - **_layouts**：主要用于存放模板文件。需要用 **YAML front matter**定义，可以通过 **\{\{ content \}\}**标记把数据插入到模板中。
 - **_posts**：存放博客的文章，文件命名必须是year-month-day-article-title.mk这样。
 - **site**用来存放最终生成的文档。
@@ -99,13 +99,11 @@ Github Pages使用[Jekyll](http://jekyllrb.com/)模板系梳，只能静态页�
 ~ $ git push origin master
 ```
 
-其主要目录结构和Jekyll大至相同。
-
-在
+其主要目录结构和Jekyll大致相同。
 
 ---
 
-<h1 id="4. Markdown and vim">4. Markdown and Vim</h1>
+<h1 id="4. Markdown and Vim">4. Markdown and Vim</h1>
 
 <h2 id="4.1 Markdown">4.1 Markdown</h2>
 
@@ -181,7 +179,8 @@ emacs指的是样式名，可以在[这里](pygments.org/demo/)查看样式名�
 
 通过以下方式实现代码高亮：
 
-{% highlight java %}
+{% highlight bash linenos %}
+{% highlight java linenos %}
 /* hello world demo */
 public class HelloWorld {
     public static void main(String args[]) {
@@ -189,9 +188,11 @@ public class HelloWorld {
 	}
 }
 {% endhighlight %}
+{% endhighlight %}
 
 或者这样：
 
+{% highlight bash linenos %}
 ```java
 /* hello world demo */
 public class HelloWorld {
@@ -200,11 +201,12 @@ public class HelloWorld {
 	}
 }
 ```
+{% endhighlight %}
 
 
 效果：
 
-{% highlight java %}
+{% highlight java linenos %}
 /* hello world demo */
 public class HelloWorld {
     public static void main(String args[]) {
@@ -213,7 +215,7 @@ public class HelloWorld {
 }
 {% endhighlight %}
 
-以上 __\{\% highlight java linenos \%\}__中java表示语言，linenos表示代码框中显示行号。使用default样式生成的css不支持linenos。
+以上 __\{% highlight java linenos %\}__中java表示语言，linenos表示代码框中显示行号。使用default样式生成的css不支持linenos。
 
 ---
 
