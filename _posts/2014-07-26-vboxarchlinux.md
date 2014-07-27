@@ -64,7 +64,7 @@ tags: [vbox, archlinux]
 # loadkeys layout
 ```
 {% highlight bash linenos %}
-# loadkeys layout
+# loadkeys layout ok
 {% endhighlight %}
 
 
