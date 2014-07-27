@@ -3,9 +3,28 @@ layout: post
 title: "用Github Pages和Jeykll管理博(bi)客(ji)"
 description: ""
 category: 
-tags: []
+tags: [Github, Jekyll, Markdown, Vim, Pygments, Markdown]
 ---
 {% include JB/setup %}
+
+
+>- [1. Github Pages](#1. Github Pages)
+- [2. Jekyll](#2. Jekyll)
+- [3. Jekyll-Bootstrap](#3. Jekyll-Bootstrap)
+- [4. Markdown and Vim](#4. Markdown and Vim)
+  - [4.1 Markdown](#4.1 Markdown)
+  - [4.2 Vim](#4.2 Vim)
+- [5. Pygments](#5. Pygments)
+- [6. 域名绑定](#6. 域名绑定)
+
+
+
+---
+
+](#6-域名绑定
+
+---)
+  - [](#-5)
 
 
 <h1 id="1. Github Pages">1. Github Pages</h1>
@@ -89,11 +108,13 @@ Github Pages使用[Jekyll](http://jekyllrb.com/)模板系梳，只能静态页�
 
 其主要目录结构和Jekyll大至相同。
 
+在
+
 ---
 
 <h1 id="4. Markdown and vim">4. Markdown and Vim</h1>
 
-<h2 id="4.1 Markdown">4.2 Markdown</h2>
+<h2 id="4.1 Markdown">4.1 Markdown</h2>
 
 Markdown 是一种轻量标记语言，写出来的文本能方便地转成HTML(或XHTML)。
 
@@ -207,7 +228,7 @@ public class HelloWorld {
 
 ---
 
-<h1 id="6 域名绑定">6 域名绑定</h2>
+<h1 id="6. 域名绑定">6. 域名绑定</h1>
 
 ---
 
