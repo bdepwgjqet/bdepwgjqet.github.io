@@ -188,7 +188,6 @@ emacs指的是样式名，可以在[这里](pygments.org/demo/)查看样式名�
 
 通过以下方式实现代码高亮：
 
-{% highlight bash %}
 {% highlight java linenos %}
 /* hello world demo */
 public class HelloWorld {
@@ -196,7 +195,6 @@ public class HelloWorld {
         System.out.println("Hello World!");
 	}
 }
-{% endhighlight %}
 {% endhighlight %}
 
 或者这样：
