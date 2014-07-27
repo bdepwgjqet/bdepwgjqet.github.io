@@ -74,8 +74,8 @@ Github Pages使用[Jekyll](http://jekyllrb.com/)模板系梳，只能静态页�
 简要说明:
 
 - **_config.yml**：配置文件，用来配置基本的信息（例如所用的标记语言）以及定义效果。
-- **_includes**：用来存放需要被反复调用的文件，可以通过 **{% include file.html %}**来调用flie.html文件。
-- **_layouts**：主要用于存放模板文件。需要用 **YAML front matter**定义，可以通过 **{{ content }}**标记把数据插入到模板中。
+- **_includes**：用来存放需要被反复调用的文件，可以通过 **\{\% include file.html \%\}**来调用flie.html文件。
+- **_layouts**：主要用于存放模板文件。需要用 **YAML front matter**定义，可以通过 **\{\{ content \}\}**标记把数据插入到模板中。
 - **_posts**：存放博客的文章，文件命名必须是year-month-day-article-title.mk这样。
 - **site**用来存放最终生成的文档。
 
