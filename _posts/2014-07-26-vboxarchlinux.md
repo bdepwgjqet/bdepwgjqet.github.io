@@ -63,9 +63,9 @@ tags: [vbox, archlinux]
   ```bash
 # loadkeys layout
 ```
-{ % highlight bash linenos % }
+{% highlight bash linenos %}
 # loadkeys layout
-{ % endhighlight % }
+{% endhighlight %}
 
 
 - 把layout换成键盘布局，如fr,uk等。
