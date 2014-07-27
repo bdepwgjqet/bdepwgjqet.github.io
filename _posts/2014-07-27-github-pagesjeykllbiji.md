@@ -17,14 +17,7 @@ tags: [Github, Jekyll, Markdown, Vim, Pygments, Markdown]
 - [5. Pygments](#5. Pygments)
 - [6. 域名绑定](#6. 域名绑定)
 
-
-
 ---
-
-](#6-域名绑定
-
----)
-  - [](#-5)
 
 
 <h1 id="1. Github Pages">1. Github Pages</h1>
@@ -58,7 +51,7 @@ Github Pages使用[Jekyll](http://jekyllrb.com/)模板系梳，只能静态页�
 
 访问本地4000端口可以访问刚创建的模板。基本的结构如下：
 
-{% highlight bash linenos %}
+{% highlight bash %}
 .
 ├── about.md
 ├── _config.yml
@@ -165,7 +158,7 @@ Vim 是编缉器之神，安装Vim markdown插件支持Markdown的语法高亮�
 
 在Jekyll的配置文件_config.yml中设置打开pgyments：
 
-{% highlight bash linenos %}
+{% highlight bash %}
 pygments: true
 markdown: redcarpet
 redcarpet:
