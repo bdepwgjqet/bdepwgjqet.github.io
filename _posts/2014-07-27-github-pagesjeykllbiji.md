@@ -181,7 +181,7 @@ emacs指的是样式名，可以在[这里](pygments.org/demo/)查看样式名�
 
 通过以下方式实现代码高亮：
 
-{% highlight java linenos %}
+{% highlight java %}
 /* hello world demo */
 public class HelloWorld {
     public static void main(String args[]) {
@@ -192,7 +192,6 @@ public class HelloWorld {
 
 或者这样：
 
-{% highlight bash %}
 ```java
 /* hello world demo */
 public class HelloWorld {
@@ -201,12 +200,11 @@ public class HelloWorld {
 	}
 }
 ```
-{% endhighlight %}
 
 
 效果：
 
-{% highlight java linenos %}
+{% highlight java %}
 /* hello world demo */
 public class HelloWorld {
     public static void main(String args[]) {
@@ -215,7 +213,7 @@ public class HelloWorld {
 }
 {% endhighlight %}
 
-以上 __{% highlight java linenos %}__中java表示语言，linenos表示代码框中显示行号。使用default样式生成的css不支持linenos。
+以上 __\{\% highlight java linenos \%\}__中java表示语言，linenos表示代码框中显示行号。使用default样式生成的css不支持linenos。
 
 ---
 
