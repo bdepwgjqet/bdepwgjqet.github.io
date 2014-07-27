@@ -8,36 +8,36 @@ tags: [vbox, archlinux]
 
 {% include JB/setup %}
 
-- [1. 废话](#1-废话)
-- [2. 安装vbox](#2-安装vbox)
-- [3. 安装arch](#3-安装arch)
-  - [3.1 下载镜像](#31-下载镜像)
-  - [3.2 分配虚拟电脑](#32-分配虚拟电脑)
-  - [3.3 挂载安装](#33-挂载安装)
-     - [3.3.1 键盘布局](#331-键盘布局)
-     - [3.3.2 分区](#332-分区)
-     - [3.3.3 格式化](#333-格式化)
-     - [3.3.4 网络](#334-网络)
-     - [3.3.5 挂载分区](#335-挂载分区)
-     - [3.3.6 安装基本系统](#336-安装基本系统)
-     - [3.3.7 配置系统](#337-配置系统)
-     - [3.3.8 安装Syslinux](#338-安装syslinux)
-- [4. 必要包安装](#4-必要包安装)
-  - [4.1 vbox相关](#41-vbox相关)
-  - [4.2 openbox](#42-openbox)
-  - [4.3 fcitx](#43-fcitx)
+- [1. 废话](#1. 废话)
+- [2. 安装vbox](#2. 安装vbox)
+- [3. 安装arch](#3. 安装arch)
+  - [3.1 下载镜像](#3.1 下载镜像)
+  - [3.2 分配虚拟电脑](#3.2 分配虚拟电脑)
+  - [3.3 挂载安装](#3.3 挂载安装)
+     - [3.3.1 键盘布局](#3.3.1 键盘布局)
+     - [3.3.2 分区](#3.3.2 分区)
+     - [3.3.3 格式化](#3.3.3 格式化)
+     - [3.3.4 网络](#3.3.4 网络)
+     - [3.3.5 挂载分区](#3.3.5 挂载分区)
+     - [3.3.6 安装基本系统](#3.3.6 安装基本系统)
+     - [3.3.7 配置系统](#3.3.7 配置系统)
+     - [3.3.8 安装Syslinux](#3.3.8 安装syslinux)
+- [4. 必要包安装](#4. 必要包安装)
+  - [4.1 vbox相关](#4.1 vbox相关)
+  - [4.2 openbox](#4.2 openbox)
+  - [4.3 fcitx](#4.3 fcitx)
 
 ---
 
 
 
-#1. 废话
+<h1 id="1. 废话">1. 废话</h1>
 - 最近发现脑容量有点不够用，于是准备用 __jekyll+github+vim+markdown__的方式写（做）博（笔）客（记）。
 - 公司发的电脑预装win7系统，各种不习惯，而且cygwin带各种坑。本着不作死就不会死的心态，准备搞个 __vbox+archlinux__。
 
 ---
 
-#2. 安装vbox
+<h1 id="2. 安装vbox">2. 安装vbox</h1>
 - 在[VirtualBox官网](https://www.virtualbox.org/wiki/Downloads)下载最新(坑)版本的安装包。
 
 - 装Vbox就遇到坑了，你敢信？刚开始下载VirtualBox 4.3.14 for Windows hosts，安装完打开提示:
@@ -49,15 +49,15 @@ tags: [vbox, archlinux]
 
 ---
 
-#3. 安装arch
-##3.1 下载镜像
+<h1 id="3. 安装arch">3. 安装arch</h1>
+<h2 id="3.1 下载镜像">3.1 下载镜像</h2>
 - 在[Archlinux官网](https://www.archlinux.org/download/)下载最新镜像。
 
-##3.2 分配虚拟电脑
+<h2 id="3.2 分配虚拟电脑">3.2 分配虚拟电脑</h2>
 - 在Vbox新建一个虚拟电脑，分配空间等等，公司配的电脑是128G ssd，这里给分配了8G。
 
-##3.3 挂载安装
-###3.3.1 键盘布局
+<h2 id="3.3 挂载安装">3.3 挂载安装</h2>
+<h3 id="3.3.1 键盘布局">3.3.1 键盘布局</h3>
 - 默认就是us(美式键盘)，可以不用改。如果要更改可以使用命令:
 
   ```bash
@@ -66,24 +66,24 @@ tags: [vbox, archlinux]
 
 - 把layout换成键盘布局，如fr,uk等。
 
-###3.3.2 分区
+<h3 id="3.3.2 分区">3.3.2 分区</h3>
 - 用gdisk工具分区，根目录3G，home目录5G：
 
   ```bash
 # gdisk disk-device
 ```
 
-###3.3.3 格式化
+<h3 id="3.3.3 格式化">3.3.3 格式化</h3>
 - 用以下命令格式化分区:
 
   ```bash
 # mkfs -t ext4 /dev/partition
 ```
 
-###3.3.4 网络
+<h3 id="3.3.4 网络">3.3.4 网络</h3>
 - 使用vbox的NAT模式，因此网格不用考虑。
 
-###3.3.5 挂载分区
+<h3 id="3.3.5 挂载分区">3.3.5 挂载分区</h3>
 - 先将根目录挂载:
 
   ```bash
@@ -99,7 +99,8 @@ tags: [vbox, archlinux]
 
 - 如果有boot是单独分区也要挂载。
 
-###3.3.6 安装基本系统
+<h3 id="3.3.6 安装基本系统">3.3.6 安装基本系统</h3>
+###
 - 先修改 __etc/pacman.d/mirrorlist__选择一个较快的源，推荐：
 > Server = http://lug.mtu.edu/archlinux/$repo/os/$arch  
 > Server = http://mirror.umd.edu/archlinux/$repo/os/$arch  
@@ -112,7 +113,7 @@ tags: [vbox, archlinux]
 # pacstrap /mnt base
 ```
 
-###3.3.7 配置系统 
+<h3 id="3.3.7 配置系统">3.3.7 配置系统</h3>
 - 用下面命令生成fstab：
 
   ```bash
@@ -141,7 +142,7 @@ LANG=en_US.UTF-8
 
 - 执行 __passwd__设置密码
 
-###3.3.8 安装Syslinux
+<h3 id="3.3.8 安装Syslinux">3.3.8 安装Syslinux</h3>
 - 刚开始安装Grub，装完后重启发现没网，不知道是哪坑了，于是换Syslinux。
 - 由于是GPT，先安装gptfdisk
 
@@ -167,9 +168,9 @@ LANG=en_US.UTF-8
 
 ---
 
-#4. 必要包安装
+<h1 id="4. 必要包安装">4. 必要包安装</h1>
 
-##4.1 vbox相关
+<h2 id="4.1 vbox相关">4.1 vbox相关</h2>
 
 - 先安装 __virtualbox-guest-iso__和 __virtualbox-guest-utils__两个包再载入模块:
 
@@ -211,7 +212,7 @@ LANG=en_US.UTF-8
 # sudo mount -t vboxsf vbox-share /mnt/vbox-share
 ```
 
-##4.2 openbox
+<h2 id="4.2 openbox">4.2 openbox</h2>
 
 - 以前用过KDE，GNOME，awesome。还没用过openbox， xfce。由于openbox比xfce更轻量，因此选择试试openbox。
 - 安装openbox, slim，执行以下命令拷贝配置文件和启动silm的服务：
@@ -229,7 +230,7 @@ LANG=en_US.UTF-8
 feh --bg-scale /path/to/image.file &
 ```
 
-##4.3 fcitx
+<h2 id="4.3 fcitx">4.3 fcitx</h2>
 
 - 安装fcitx-im,fcitx-configtool,fcitx-table-extra，设置环境变量，在~/.xinitrc中加入：
 >export GTK_IM_MODULE=xim  
