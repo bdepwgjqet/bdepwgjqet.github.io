@@ -179,7 +179,7 @@ emacs指的是样式名，可以在[这里](pygments.org/demo/)查看样式名�
 
 通过以下方式实现代码高亮：
 
-{% highlight bash linenos %}
+```bash
 {% highlight java linenos %}
 /* hello world demo */
 public class HelloWorld {
@@ -188,7 +188,7 @@ public class HelloWorld {
 	}
 }
 {% endhighlight %}
-{% endhighlight %}
+```
 
 或者这样：
 
@@ -222,14 +222,20 @@ public class HelloWorld {
 <h1 id="6. 域名绑定">6. 域名绑定</h1>
 
 Github 绑定域名的方法可以参考[Github官方说明](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages)。
+
 对于一级域名：
+
 - 在name.github.io项目根目录创建CNAME文件，在其第一行写入域名（例：name.com）。
+
 - 在域名运营商进行A解析。由于国外DNS易被（XX），可以使用dnspod.cn进行DNS解析（Github需要将域名解析为192.30.252.153,192.30.252.154，解析完后可以用以下dig命令验证），然后更改运营商处 __Nameservers__为F1G1NS1.DNSPOD.NET和F1G1NS2.DNSPOD.NET。
+
   ```bash
-~ $ dig your-site-name.com +nostats +nocomments +nocmd
+~ $ dig your-site-name.com +nostats +nocomments +nocmd  
 ~ $ dig your-github-name.github.io +nostats +nocomments +nocmd
 ```
+
   两次询问DNS结果应当一至。
+
 - 等待解析成功。
 
 ---
