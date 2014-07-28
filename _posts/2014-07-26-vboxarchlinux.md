@@ -133,7 +133,7 @@ tags: [vbox, archlinux]
 # ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
 
-- 取消 __etc/locale.gen__中 __zh_CN.UTF-8 UTF-8__的注释，执行 __locale-gen__生成lcoale信息
+- 取消 __etc/locale.gen__中 __zh_CN.UTF-8 UTF-8__的注释，执行 __locale-gen__生成locale信息
 - 在 __etc/locale.conf__中设置语言，例如：
 
   ```bash
