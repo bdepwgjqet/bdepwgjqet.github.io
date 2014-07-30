@@ -2,6 +2,8 @@
 layout: page
 ---
 {% include JB/setup %}
+
+<title>bdep</title>
     
 <ul class="posts">
   {% for post in site.posts %}
