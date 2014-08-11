@@ -22,26 +22,24 @@ tags: []
 - Spring中装配bean的例子：
  - Spring中通过\<bean\>创建一个对象。如下：
 
-      ```XML
+```XML
 <bean id="beanid" class="*.Oneclass" >
 ```
-
       beanid实际上会这样被创建：
 
-      ```java
+```java
 new *.Oneclass();
 ```
 
   - 用XmlBeanFactory，ClassPathXmlApplicationContext，FileSystemXmlApplicationContext，XmlWebApplicationContext容器装配，例如： 
     先定义接口：
 
-      ```java
+```java
 package com.springExample;
 public interface Actioner {
 	void action() throws ActionException;
 }
 ```
-
       声名一个Bean：
 
 {% highlight java linenos %}
@@ -72,21 +70,18 @@ public class Man implements Actioner {
 
 }
 {% endhighlight %}
-
     XML配置：
 
-    ```XML
+```XML
 <bean id="Mike" class="com.springExample.Man" />
 ```
-
     用ClassPathXmlApplicationContext加载Spring上下文：
 
-    ```java
+```java
 ApplicationContext ctx = new ClassPathXmlApplicationContext(com/springExample/spring-Example.xml);
 Actioner actioner = (Actioner) ctx.getBean("Mike");
 actioner.action();
 ```
-
     执行后会显示：do 2 action.
   
   - 关于依赖注入：
@@ -126,7 +121,6 @@ actioner.action();
    </constructor-arg>  
 </bean>  
 {% endhighlight %}
-
      - 2.用setter方法注入，用<property>标签（可以用<ref bean>引用其它bean的值），例如下:
 
 {% highlight XML linenos %}
