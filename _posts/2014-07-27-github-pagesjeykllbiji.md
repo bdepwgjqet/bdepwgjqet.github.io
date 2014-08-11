@@ -183,8 +183,8 @@ emacs指的是样式名，可以在[这里](pygments.org/demo/)查看样式名�
 { % highlight java linenos % }
 /* hello world demo */
 public class HelloWorld {
-    public static void main(String args[]) {
-        System.out.println("Hello World!");
+	public static void main(String args[]) {
+		System.out.println("Hello World!");
 	}
 }
 { % endhighlight % }

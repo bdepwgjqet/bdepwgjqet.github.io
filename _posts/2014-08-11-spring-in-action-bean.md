@@ -23,7 +23,7 @@ tags: []
  - Spring中通过\<bean\>创建一个对象。如下：
 
 ```XML
-<bean id="beanid" class="*.Oneclass" >
+	<bean id="beanid" class="*.Oneclass" >
 ```
 
       beanid实际上会这样被创建：
