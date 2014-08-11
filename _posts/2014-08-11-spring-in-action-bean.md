@@ -22,32 +22,33 @@ tags: []
 - Spring中装配bean的例子：
  - Spring中通过\<bean\>创建一个对象。如下：
 
-    ```XML
+      ```XML
 <bean id="beanid" class="*.Oneclass" >
 ```
 
-    beanid实际上会这样被创建：
+      beanid实际上会这样被创建：
 
-    ```java
+      ```java
 new *.Oneclass();
 ```
 
   - 用XmlBeanFactory，ClassPathXmlApplicationContext，FileSystemXmlApplicationContext，XmlWebApplicationContext容器装配，例如： 
     先定义接口：
 
-    ```java
+      ```java
 package com.springExample;
 public interface Actioner {
 	void action() throws ActionException;
 }
 ```
 
-    声名一个Bean：
+      声名一个Bean：
 
-    ```java
+{% highlight java linenos %}
 package com.springExample;
 
 public class Man implements Actioner {
+
 	private int cnt = 2;
 	private String name;
 	private List<String> friendsList;
@@ -56,6 +57,7 @@ public class Man implements Actioner {
 	private boolean isHealthy;
 
 	public Man() {}
+
 	public Man(int cnt, List<String> friendsList, Map<String,String> friendToTime, Set<String> friendsSet boolean isHealthy) {
 		this.cnt = cnt;
 		this.friendsList = friendsList;
@@ -63,11 +65,13 @@ public class Man implements Actioner {
 		this.friendsSet = friendsSet;
 		this.isHealthy = isHealthy;
 	}
+
 	public void action() throws ActionException {
 		System.out.println("do "+cnt+" action");
 	}
+
 }
-```
+{% endhighlight %}
 
     XML配置：
 
