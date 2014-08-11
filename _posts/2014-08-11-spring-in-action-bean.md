@@ -25,6 +25,7 @@ tags: []
 ```XML
 <bean id="beanid" class="*.Oneclass" >
 ```
+
       beanid实际上会这样被创建：
 
 ```java
@@ -40,7 +41,8 @@ public interface Actioner {
 	void action() throws ActionException;
 }
 ```
-      声名一个Bean：
+
+声名一个Bean：
 
 {% highlight java linenos %}
 package com.springExample;
@@ -70,11 +72,13 @@ public class Man implements Actioner {
 
 }
 {% endhighlight %}
-    XML配置：
+
+XML配置：
 
 ```XML
 <bean id="Mike" class="com.springExample.Man" />
 ```
+
     用ClassPathXmlApplicationContext加载Spring上下文：
 
 ```java
@@ -82,11 +86,13 @@ ApplicationContext ctx = new ClassPathXmlApplicationContext(com/springExample/sp
 Actioner actioner = (Actioner) ctx.getBean("Mike");
 actioner.action();
 ```
-    执行后会显示：do 2 action.
+
+执行后会显示：do 2 action.
   
   - 关于依赖注入：
+
      - 1.通过构造函数注入,用<constructor-arg>标签。
-       上例Mike的其它信息可以用<constructor-arg>通过以下方式注入（该标签可以用ref引用其它bean）：
+上例Mike的其它信息可以用<constructor-arg>通过以下方式注入（该标签可以用ref引用其它bean）：
 
 {% highlight XML linenos %}
 <bean id="Mike" class="com.springExample.Man">  
@@ -121,6 +127,7 @@ actioner.action();
    </constructor-arg>  
 </bean>  
 {% endhighlight %}
+
      - 2.用setter方法注入，用<property>标签（可以用<ref bean>引用其它bean的值），例如下:
 
 {% highlight XML linenos %}
