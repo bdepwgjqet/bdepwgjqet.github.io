@@ -30,7 +30,7 @@ Spring中装配bean的例子：
 - Spring中通过\<bean\>创建一个对象。如下：
 
   ```XML
-	<bean id="beanid" class="*.Oneclass" >
+<bean id="beanid" class="*.Oneclass" >
 ```  
 
   beanid实际上会这样被创建：
