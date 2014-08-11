@@ -20,9 +20,9 @@ tags: []
  - Java注解的方式：
 
 - Spring中装配bean的例子：
- - Spring中通过<bean>创建一个对象。如下：
+ - Spring中通过\<bean\>创建一个对象。如下：
 
-   ```XML
+    ```XML
 <bean id="beanid" class="*.Oneclass" >
 ```
 
@@ -89,7 +89,7 @@ actioner.action();
      - 1.通过构造函数注入,用<constructor-arg>标签。
        上例Mike的其它信息可以用<constructor-arg>通过以下方式注入（该标签可以用ref引用其它bean）：
 
-       {% highlight XML linenos %}
+{% highlight XML linenos %}
 <bean id="Mike" class="com.springExample.Man">  
    <constructor-arg value="12" index="0" >  
    </constructor-arg>  
@@ -131,7 +131,7 @@ actioner.action();
 		<value>12</value>  
 	</property>  
 
-	<property name = "name">  
+	<property name = "name">   
 		<value>Mike Tom</value>  
 	</property>
 
