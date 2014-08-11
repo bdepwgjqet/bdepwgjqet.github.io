@@ -89,9 +89,9 @@ actioner.action();
 
 执行后会显示：do 2 action.
   
-  - 关于依赖注入：
+- 关于依赖注入：
 
-     - 1.通过构造函数注入,用<constructor-arg>标签。
+ - 1.通过构造函数注入,用<constructor-arg>标签。
 上例Mike的其它信息可以用<constructor-arg>通过以下方式注入（该标签可以用ref引用其它bean）：
 
 {% highlight XML linenos %}
@@ -128,7 +128,7 @@ actioner.action();
 </bean>  
 {% endhighlight %}
 
-     - 2.用setter方法注入，用<property>标签（可以用<ref bean>引用其它bean的值），例如下:
+ - 2.用setter方法注入，用<property>标签（可以用<ref bean>引用其它bean的值），例如下:
 
 {% highlight XML linenos %}
 <bean id="Mike" class="com.springExample.Man">  
