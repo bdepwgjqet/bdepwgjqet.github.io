@@ -260,7 +260,7 @@ __注解装配：__
 - JSR-330的@Inject注解
 - JSR-250的@Resource注解
 
-@autowired方式例子：
+__@autowired方式例子：__
 
 直接标注属性：
 
@@ -302,6 +302,7 @@ private C c;
 ```
 
 __@Inject方式：__与Autowired一样，@Inject没有required属性。
+
 __@Resource方式：__作用相当于@Autowired，@Autowired按byType自动注入，而@Resource默认按byName自动注入（推荐用）。
 
 
@@ -321,7 +322,7 @@ __用java代替XML配置：__
 
 使用@Configuration注解的Java类，代替\<beans\>元素
 
-```Java
+{% highlight Java linenos %}
 package com.a.b.c;
 
 import org.springframework.context.annotation.Configuration;
@@ -340,7 +341,7 @@ public class c {
 		return new classA(100);
 	}
 }
-```
+{% endhighlight %}
 
 这样会创建并反回一个ClassA的实例对象，声明为一个id为beanA的classA Bean。
 
