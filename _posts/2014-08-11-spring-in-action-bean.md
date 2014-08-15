@@ -179,3 +179,169 @@ actioner.action();
 	</property>
 </bean>
 {% endhighlight %}
+
+
+__最小化装配__
+
+目的：为了简化XML的配置
+
+方式：
+
+- 自动装配(autowiring)，减少甚至消除<property>和<constructor-arg>元素，让spring自动识别如何装配Bean的依赖关系。
+- 自动检测(autodiscovery)，让Spring自动识别哪些类需要被装配成Bean，减少<bean>元素的使用。
+
+自动装配Bean属性的方式：
+
+- byName：把与Bean的属性具有相同名字（或ID)的其他Bean自动装配到该Bean的对应属性中。若没有名字相匹配的Bean，则不装配。
+- byType：把与Bean的属性具有相同类型的其它Bean自动装配到该Bean的对应属性中。若没有名字相匹配的Bean，则不装配。
+- constructor：把与Bean的构造器入参具有相同类型的其他Bean自动装配到Bean构造器的对应入参中。
+- autodetect：先尝试用cnostructor自动装配，若失败，再用ByType。
+
+__byName自动装配的例子：__
+
+假设有一个id为A的Bean显式装配是这样的：
+
+```XML
+<bean id="A" class="com.i.j.k">
+	<property name="X" value="V">
+	<property name="B" ref="C">
+</bean>
+```
+
+id为B的Bean已经被定义：
+
+```XML
+<bean id="B" class="com.u.v.w"/>
+```
+
+那么利用byName方式A可以这样装配：
+
+```XML
+<bean id="A" class="com.i.j.k" autowire="byName">
+	<property name="X" value="V">
+</bean>
+```
+
+byType自动装配的例子类似byName，只不过byType是寻找有相同属性类型的Bean，要求只能有一个相匹配，如果找到多个，可以使用bean的pirmary属性，会优先选择pirmary属性为ture的Bean，否则抛出异常（primary属性默认设置是ture）。
+
+__constructor自动装配例子：__
+
+要装配这样一个Bean:
+
+```XML
+<bean id="A" class="com.x.y.z" autowire="constructor"/>
+```
+
+Spring会审视z的构造器，并尝试在Spring配置中寻找匹配z中某一个构造器的所有入参的Bean。如果有多个，处理方式与byType相同。
+
+默认自动装配：在\<beans\>标签中设置default-autowire属性。
+
+```XML
+<beans default-autowire="constructor">
+</beans>
+```
+
+__混合装配__： 可以混合使用自动装配和显式装配，这样可以避免自动装配中找到多个抛出异常的情况。
+- PS：不能混合使用constructor自动装配和\<constructor-arg\>元素，这是因为使用constructor时必须让Spring自动装配构造器的所有入参。
+
+__注解装配：__
+
+使用\<context:annotation-config\>元素开启注解装配：
+
+```XML
+<beans default-autowire="constructor">
+<context:annotation-config \>
+</beans>
+```
+
+方式:
+
+- Spring自带的@Atutowired注解
+- JSR-330的@Inject注解
+- JSR-250的@Resource注解
+
+@autowired方式例子：
+
+直接标注属性：
+
+```Java
+@Autowired
+private ClassA classA;
+</beans>
+```
+
+或者标注构造器：
+
+```Java
+@Autowired
+public setClassA(ClassA classA) {
+	this.classA = classA;
+}
+</beans>
+```
+
+这样子Spring都会用byType方法进行自动装配。
+
+__避免装配失败抛出异常__：
+
+- 可以使用@Autowired(required=false)，这样装配失败，该元素会被设为null。
+- 可以使用@Qualifier("beanid")指定id=beanid的Bean进行装配。（可以创建自定义的限定器，如下会把B装配给c）
+
+  ```Java
+@Qualifier
+public interface A {
+}
+
+@A
+public class B implements C {
+}
+
+@Autowired
+@A
+private C c;
+```
+
+__@Inject方式：__与Autowired一样，@Inject没有required属性。
+__@Resource方式：__作用相当于@Autowired，@Autowired按byType自动注入，而@Resource默认按byName自动注入（推荐用）。
+
+
+__用java代替XML配置：__
+
+首先用少量的XML配置启用Java配置：
+
+
+```XML
+<beans>
+	<context:component-scan 
+		base-package="com.a.b.c" />
+</beans>
+```
+
+这会让Spring在com.a.b.c包内晒找使用@Configuration注解所标注的所有类。
+
+使用@Configuration注解的Java类，代替\<beans\>元素
+
+```Java
+package com.a.b.c;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+
+public class c {
+	@Bean
+	public BeanA beanA() {
+		return new ClassA();
+	}
+
+	//注入的方式
+	@Bean 
+	public BeanA beanA100() {
+		return new classA(100);
+	}
+}
+```
+
+这样会创建并反回一个ClassA的实例对象，声明为一个id为beanA的classA Bean。
+
+
