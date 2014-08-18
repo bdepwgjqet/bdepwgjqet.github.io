@@ -8,6 +8,7 @@ tags: []
 {% include JB/setup %}
 
 相关定义：
+
  - __面向切面编程（AOP）__：为了解决横切关注点（分布于应用中多处的功能）与它们所影响的对象之间的解耦，将横切关注点与业务逻辑相分离。
 
  - __切面：__横切关注点被模块化为特殊的类，是通知和切点的结合。
@@ -25,7 +26,7 @@ tags: []
 
 __声明切面的方法：__
 
-有一个类：
+有如下Audience类：
 
 {% highlight Java linenos %}
 package com.springinaction.springdo1;
@@ -69,7 +70,7 @@ public class Audience {
 	<!-- 定义切面 -->
 	<aop:aspect ref="audience">
 		
-		<!-- 定义一个命名切点，消除冗余切点定义 -->
+		<!-- 定义一个命名切点,消除冗余切点定义 -->
 		<aop:pointcut id="performance" expression="execution(* com.springinaction.springdo1.Peformer.perform(..))" />
 
 		<!-- 定义AOP前置通知 -->
@@ -88,7 +89,7 @@ public class Audience {
 
 execution()用于编写切点，上例中*号表示不关心方法的返回值，(..)标识切点选择任意的perform()方法，无论该方法的入参是什么。
 
-__声明环绕通知__及 __为通知传递参数__及 __通过切面引入新功能__见Spring In Action 3 P96-P101 。
+__声明环绕通知__、 __为通知传递参数__以及 __通过切面引入新功能__的肉容见__Spring In Action 3__的P96-P101 。
 
 __通过注解标注一个切面的例子：__
 
