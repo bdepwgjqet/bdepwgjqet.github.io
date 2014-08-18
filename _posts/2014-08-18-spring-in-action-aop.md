@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Spring in Action 笔记（二、AOP相关）"
+description: ""
+category: 
+tags: []
+---
+{% include JB/setup %}
+
 相关定义：
  - __面向切面编程（AOP）__：为了解决横切关注点（分布于应用中多处的功能）与它们所影响的对象之间的解耦，将横切关注点与业务逻辑相分离。
 
@@ -119,5 +128,3 @@ public class Audience {
 	}
 }
 {% endhighlight %}
-
-
