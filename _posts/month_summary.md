@@ -332,7 +332,7 @@ velocity一些用法:
 
 - Velocity 可以 parse 本地vm文件，例#parse("a.vm")
 
-- #stop 可以停止执行模板引擎并返回，用于debug
+- \#stop 可以停止执行模板引擎并返回，用于debug
 
 定义重用的VTL，如下代码：
 
@@ -342,11 +342,16 @@ velocity一些用法:
 #end
 ```
 
-调用方法：#d()
+调用方法：
+
+```velocity
+#d()
+```
   	
 Velocity demo：
 
 > http://www.yanyulin.info/pages/2014/03/velocity_disabuse_1.html 
+
 > http://m.poorren.com/apache-velocity-java/
 
 
