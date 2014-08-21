@@ -15,6 +15,7 @@
   - [3.4 Webx](#3.4 Webx)
      - [3.4.1 Webx目录结构](#3.4.1 Webx目录结构)
      - [3.4.2 Webx执行流程](#3.4.2 Webx执行流程)
+  - [3.5 HSF](#3.4 HSF)
 
 ---
 
@@ -196,35 +197,9 @@ Repository位置修改过也需要在Eclipse中配置：
 
 配置server：
 
-```XML
-<server>                                  
-	<id>snapshots</id>                  
-	<username>snapshotsAdmin</username>          
-	<password>123456</password>
-</server>                            
-<server> 
-	<id>releases</id> 
-	<username>admin</username>
-	<password>taobao123456789</password>
-</server>
-```
 
 配置镜像库：
 
-```XML
-<mirror>
-	<id>tbmirror</id>
-	<mirrorOf>central</mirrorOf>
-	<name>taobao mirror</name>
-	<url>http://mvnrepo.taobao.ali.com/mvn/repository</url>
-</mirror>
-<mirror>
-	<id>tbmirror-snapshots</id>
-	<mirrorOf>snapshots</mirrorOf>
-	<name>taobao mirror snapshots</name>
-	<url>http://mvnrepo.taobao.ali.com/mvn/repository</url>
-</mirror>
-```
 
 配置Profile和激活的Profile.
 
@@ -961,5 +936,8 @@ __表单验证的流程__
 webx框架的详细介绍 :
 
 > http://openwebx.org/docs/Webx3_Guide_Book.html#webx.form
+
+
+<h3 id="3.4 HSF">3.4 HSF</h3>
 
 
