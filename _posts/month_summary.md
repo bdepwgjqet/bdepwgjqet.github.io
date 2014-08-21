@@ -12,6 +12,9 @@
   - [3.3 Spring](#3.3 Spring)
      - [3.3.1 bean相关](#3.3.1 bean相关)
      - [3.3.2 AOP相关](#3.3.2 AOP相关)
+  - [3.4 Webx](#3.4 Webx)
+     - [3.4.1 Webx目录结构](#3.4.1 Webx目录结构)
+     - [3.4.2 Webx执行流程](#3.4.2 Webx执行流程)
 
 ---
 
@@ -823,4 +826,140 @@ public class Audience {
 	}
 }
 {% endhighlight %}
+
+<h3 id="3.4 Webx">3.4 Webx</h3>
+
+Webx是一套基于Java Servlet API的通用Web框架。在Ali内部被广泛使用。
+
+Webx框架可以划分成三个大层次:
+
+- SpringExt：基于Spring，提供扩展组件的能力。它是整个框架的基础。
+
+- Webx Framework：基于Servlet API，提供基础的服务，例如：初始化Spring、初始化日志、接收请求、错误处理、开发模式等。Webx Framework只和servlet及spring相关 —— 它不关心Web框架中常见的一些服务，例如Action处理、表单处理、模板渲染等。因此，事实上，你可以用Webx Framework来创建多种风格的Web框架。
+
+- Webx Turbine：基于Webx Framework，实现具体的网页功能，例如：Action处理、表单处理、模板渲染等。
+
+<h4 id="3.4.1 Webx目录结构">3.4.1 Webx目录结构</h4>
+
+一个简单的Webx项目的目录结构:
+
+```bash
+./pom.xml
+./src
+`-- main
+    |-- java
+    |   `-- com
+    |       `-- alibaba
+    |           `-- webx
+    |               `-- tutorial1
+    |                   `-- app1
+    |                       |-- module
+    |                       |   |-- action
+    |                       |   |   `-- RegisterAction.java
+    |                       |   `-- screen
+    |                       |       |-- form
+    |                       |       |   `-- Welcome.java
+    |                       |       |-- list
+    |                       |       |   `-- Default.java
+    |                       |       |-- multievent
+    |                       |       |   |-- SayHello1.java
+    |                       |       |   `-- SayHello2.java
+    |                       |       `-- simple
+    |                       |           |-- Count.java
+    |                       |           |-- Download.java
+    |                       |           |-- SayHi.java
+    |                       |           `-- SayHiImage.java
+    |                       `-- Visitor.java
+    `-- webapp
+        |-- app1
+        |   `-- templates
+        |       |-- layout
+        |       |   `-- default.vm
+        |       `-- screen
+        |           |-- form
+        |           |   |-- register.vm
+        |           |   `-- welcome.vm
+        |           |-- index.vm
+        |           `-- list
+        |               |-- asHtml.vm
+        |               |-- asJson.vm
+        |               `-- asXml.vm
+        |-- common
+        |   `-- templates
+        |       |-- layout
+        |       |   `-- default.vm
+        |       |-- macros.vm
+        |       `-- screen
+        |           `-- error.vm
+        `-- WEB-INF
+            |-- app1
+            |   `-- form.xml
+            |-- common
+            |   |-- pipeline.xml
+            |   |-- pipeline-exception.xml
+            |   |-- resources.xml
+            |   |-- uris.xml
+            |   |-- webx-component.xml
+            |   `-- webx-component-and-root.xml
+            |-- logback.xml
+            |-- web.xml
+            |-- webx.xml
+            `-- webx-app1.xml
+```
+
+src/main目录下:
+
+- java目录下主要放置基本编程模块.
+
+- webapp目录下主要放置配置文件和模板文件.
+
+webapp目录下:
+
+- templates中主要放置模板文件
+  - layout放置整个页面的布局的模板文件
+  - control放置一些公用的小页面,比如页头页尾
+  - screen放置主体的内容
+
+- WEB-INF放置所有的配置文件
+  - webx.xml : 配置webx所用到的所有srevices
+  - pipeline.xml : webx框架的总控文件
+  - log4j.xml : 日志的配置文件
+
+java目录下主要是Modules编程模块:
+
+- Screen目录下 : 处理页面显示逻辑的mdoule
+
+- Control目录下 : 和Screen类似,可以被别的screen或loyaut引用
+
+- Action目录下 : 处理表单提交的mudole
+
+<h4 id="3.4.2 Webx执行流程">3.4.2 Webx执行流程</h4>
+
+__访问一个页面webx的执行流程__
+
+例如当访问show.htm面页时:
+
+1. webx会在相同目录下查找show.vm模板.
+
+2. 在对应目录下查找screen类show(Default,TemplateScreen),如果找不到则查找括号中的screen类.
+
+3. 执行screen类中的execute方法,并渲染screen模板.
+
+__表单验证的流程__
+
+在vm模板中有如下配置:
+
+```velocity
+<form action="action.htm" method="post">
+	<input type="hidden" name="event_submit_do_upload" value="anything" />
+    <input type="hidden" name="action" value="resign/upload_action" />
+</form>
+```
+
+这样每次提交表单后,都会调用UploadAction.doUpload方法, 再访问action.htm.
+
+webx框架的详细介绍 :
+
+> http://openwebx.org/docs/Webx3_Guide_Book.html#webx.form
+
 
