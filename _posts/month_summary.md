@@ -16,6 +16,8 @@
      - [3.4.1 Webx目录结构](#3.4.1 Webx目录结构)
      - [3.4.2 Webx执行流程](#3.4.2 Webx执行流程)
   - [3.5 HSF](#3.4 HSF)
+     - [3.5.1 如何对外发布](#3.5.1 如何对外发布)
+     - [3.5.2 如何调用HSF服务](#3.5.2 如何调用HSF服务)
 
 ---
 
@@ -735,7 +737,7 @@ public class Audience {
 
 通过如下方式把Bean变成一个切面：
 
-{% highlight Java linenos %}
+{% highlight XML linenos %}
 <!-- 顶层aop配置元素 -->
 <aop:config>
 
@@ -938,6 +940,174 @@ webx框架的详细介绍 :
 > http://openwebx.org/docs/Webx3_Guide_Book.html#webx.form
 
 
-<h3 id="3.4 HSF">3.4 HSF</h3>
+<h3 id="3.5 HSF">3.5 HSF</h3>
+
+HSF全称为High-Speed Service Framework，旨在为淘宝的应用提供一个分布式的服务框架，HSF从分布式应用层面以及统一的发布/调用方式层面为大家提供支持，从而可以很容易的开发分布式的应用以及提供或使用公用功能模块，而不用考虑分布式领域中的各种细节技术，例如远程通讯、性能损耗、调用的透明化、同步/异步调用方式的实现等等问题。HSF通过ConfigServer联接Consumer和Provider,将Provider提供的Spring Bean供Consumer调用.
+
+HSF从1.4.2以后支持在Jboss或Tomcat中部署运行.
+
+Jboss 环境:
+
+- 下载淘宝官方认可的JBoss 4.2.2；
+
+- 下载HSF V1.4.8发行版；
+
+- 下载完毕后解压放入jboss 4.2.2的server/default/deploy下,这样Jboss会在启动时自动部署HSF服务。
+
+下载地址:
+
+> http://hsf.taobao.net/hsfversion/
+
+<h4 id="3.5.1 如何对外发布">3.5.1 如何对外发布</h4>
+
+需求 : 已有一个名称为HelloWorld的Spring Bean，此Bean实现的接口为com.taobao.hsf.test.HelloWorld，现需让其他功能模块能远程调用此Spring Bean.
+
+首先增加一个Spring Bean XML :
+
+{% highlight XML linenos %}
+<beans>
+
+ <bean class="com.taobao.hsf.app.spring.util.HSFSpringProviderBean">
+
+   <!--  serviceInterface 必须配置 [String]，为服务对外提供的接口 -->
+   <property name="serviceInterface">
+     <value>com.taobao.hsf.test.HelloWorld</value>
+   </property>
+
+   <!--   target 必须配置 [ref]，为需要发布为HSF服务的spring bean id -->
+   <property name="target">
+     <ref bean="HelloWorld"/>
+   </property>
+
+   <!--    serviceVersion 可选配置 [String]，含义为服务的版本，默认为1.0.0 -->
+   <property name="serviceVersion">
+     <value>1.1.0</value>不要有空白字符/回车换行
+   </property>
+
+   <!--    serviceName 推荐配置 [String]，含义为服务的名称，便于管理，默认为null -->
+   <property name="serviceName">
+     <value>HelloWorldService</value>
+   </property>
+
+   <!--    serviceDesc 可选配置 [String]，含义为服务的描述信息，便于管理，默认为null -->
+   <property name="serviceDesc">
+     <value>HelloWorldService providered by HSF</value>
+   </property>
+
+   <!--    serviceGroup 可选配置 [String]，含义为服务所属的组别，相当于此机器所在的VIP，默认为HSF -->
+   <property name="serviceGroup">
+      <value>HSF</value>
+   </property>
+
+   <!--    supportAsynCall 可选配置 [true|false]，含义为标识此服务是否支持持久可靠的异步调用
+       默认值为false，也就是不支持持久可靠的异步调用，但仍然支持非持久可靠的oneway、future以及callback方式的异步调用 -->
+   <property name="supportAsynCall">
+     <value>false</value>
+   </property>
+
+   <!--    clientTimeout 可选配置 [int]，含义为客户端调用此服务时的超时时间，单位为ms，默认为3000ms -->
+   <property name="clientTimeout">
+     <value>3000</value>
+   </property>
+
+   <!--    clientIdleTimeout 可选配置 [int]，含义为客户端连接空闲的超时时间，单位为s，默认为600 -->
+   <property name="clientIdleTimeout">
+     <value>60</value>
+   </property>
+
+   <!--    serializeType 可选配置 [String(hessian|java)]，含义为序列化类型，默认为hessian -->
+   <property name="serializeType">
+     <value>java</value>
+   </property>
+
+   <!--    methodToInjectConsumerIp 可选配置，含义为注入调用端IP的方法，这样业务服务也可以得知是哪个IP在调用，该方法的参数必须为String -->
+   <property name="methodToInjectConsumerIp">
+     <value>setConsumerIP</value>
+   </property>
+
+   <!--    methodSpecials为可选配置，含义为为方法单独配置超时时间，这样接口中的方法可以采用不同的超时时间 -->
+   <property name="methodSpecials">
+     <list>
+       <bean class="com.taobao.hsf.model.metadata.MethodSpecial">
+          <property name="methodName" value="sum" />
+          <property name="clientTimeout" value="10000" />
+       </bean>
+     </list>
+   </property>
+ </bean>
+{% endhighlight %}
+
+将此XML加入到Spring加载的applicationContext文件中.
+
+按项目正常方式打包部署,启动Jboss,此HelloWorld就可被远程以HSF服务的方式调用了.
+
+<h4 id="3.5.2 如何调用HSF服务">3.5.2 如何调用HSF服务</h4>
+
+需求 : 在Spring中远程调用一个接口为com.taobao.hsf.test.HelloWorld，版本为1.1.0的服务，需调用此服务的Spring bean名称定为CallHelloWorld.
+
+首先增加一个Spring Bean XML:
+
+{% highlight XML linenos %}
+<beans>
+
+ <bean id="CallHelloWorld" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean">
+
+   <!--  interfaceName 必须配置 [String]，为需要调用的服务的接口 -->
+   <property name="interfaceName">
+     <value>com.taobao.hsf.test.HelloWorld</value>
+   </property>
+
+   <!--  version 可选配置 [String]，含义为需要调用的服务的版本，默认为1.0.0 -->
+   <property name="version">
+     <value>1.1.0</value>
+   </property>
+
+   <!--  group 可选配置 [String]，含义为需要调用的服务所在的组，默认为HSF -->
+   <property name="group">
+     <value>HSF</value>
+   </property>
+
+   <!--  methodSpecials 可选配置，含义为为方法单独配置超时时间，这样接口中的方法可以采用不同的超时时间 -->
+   <property name="methodSpecials">
+     <list>
+       <bean class="com.taobao.hsf.model.metadata.MethodSpecial">
+         <property name="methodName" value="sum" />
+         <property name="clientTimeout" value="10000" />
+       </bean>
+     </list>
+   </property>
+
+     <!-- target为可选配置[String]，含义为需调用的服务的地址和端口
+     主要用于单元测试环境和-Dhsf.run.mode=0的开发环境中，在运行环境下，此属性将无效，而是采用配置中心推送回来的目标服务地址信息 -->
+   <property name="target">
+       <value>10.1.6.57:12200?_TIMEOUT=1000</value>
+   </property>
+
+	<!-- asyncallMethods为可选配置[List]，含义为调用此服务时需要采用异步调用的方法名列表以及异步调用的方式 默认为空集合，即所有方法都采用同步调用.  格式为： name:方法名;type:异步调用类型; -->
+
+   <property name="asyncallMethods">
+     <list>
+       <value>name:save</value>
+     </list>
+   </property>
+
+     <!-- 设置回调的处理器，此处理器不用实现HSF的任何接口，方法遵循以下约定即可
+     public void ${name}_callback(Object invokeContext, Object appResponse, Throwable t)，其中${name}即为发起调用的远程服务的方法名 -->
+   <property name="callbackHandler" ref="PlugServiceCallbackHandler" />
+
+   <!-- 设置传递上下文的方式为接口方式，即在发起调用时先调用接口上的setInvokeContext方法传入上下文对象 -->
+   <property name="interfaceMethodToAttachContext" value="setInvokeContext" />
+
+   <!-- 设置传递上下文的方式为ThreadLocal对象方式，即在发起调用时通过一个ThreadLocal对象来设置上下文对象，接口方式和ThreadLocal对象方式选其一即可 -->
+   <property name="invokeContextThreadLocal" ref="invokeContextThreadLocal" /> 
+ </bean>
+
+</beans> 
+{% endhighlight %}
+
+
+参考:
+
+> http://baike.corp.taobao.com/index.php/HSF 
 
 
