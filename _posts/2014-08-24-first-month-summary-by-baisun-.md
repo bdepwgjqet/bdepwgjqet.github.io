@@ -622,7 +622,7 @@ __注解装配：__
 
 ```XML
 <beans default-autowire="constructor">
-<context:annotation-config \>
+<context:annotation-config />
 </beans>
 ```
 
