@@ -1549,7 +1549,7 @@ SQL Map API使用和mapped statement非常相似的结构,可以避免一系列i
 
 > http://tmall.admin.taobao.org/brand/brandIndex.htm
 
-Bug提交地址：
+- Bug提交地址：
 
 > http://k3.alibaba-inc.com/issue?versionId=1044675
 
