@@ -212,9 +212,35 @@ Repository位置修改过也需要在Eclipse中配置：
 
 配置server：
 
+```XML
+<server>                                  
+	  <id>snapshots</id>                  
+	  <username>snapshotsAdmin</username>          
+	  <password>123456</password>
+</server>                            
+<server> 
+  <id>releases</id> 
+  <username>admin</username>
+  <password>taobao123456789</password>
+</server>
+```
 
 配置镜像库：
 
+```XML
+<mirror>
+	<id>tbmirror</id>
+	<mirrorOf>central</mirrorOf>
+	<name>taobao mirror</name>
+	<url>http://mvnrepo.taobao.ali.com/mvn/repository</url>
+</mirror>
+<mirror>
+	<id>tbmirror-snapshots</id>
+	<mirrorOf>snapshots</mirrorOf>
+	<name>taobao mirror snapshots</name>
+	<url>http://mvnrepo.taobao.ali.com/mvn/repository</url>
+</mirror>
+```
 
 配置Profile和激活的Profile.
 
