@@ -9,11 +9,11 @@ tags: []
 
 
 > - [1. 引言](#1. 引言)
-- [2. 环境相关](#2. 环境相关)
+- [2. 相关环境](#2. 相关环境)
   - [2.1 开发环境](#2.1 开发环境)
   - [2.2 Aone相关](#2.2 Aone相关)
   - [2.3 log查看](#2.3 log查看)
-- [3. 技术相关](#3. 技术相关)
+- [3. 用到的技术](#3. 用到的技术)
   - [3.1 Maven](#3.1 Maven)
      - [3.1.1 Maven安装](#3.1.1 Maven安装)
      - [3.1.2 Maven配置](#3.1.2 Maven配置)
@@ -30,17 +30,18 @@ tags: []
      - [3.5.2 如何调用HSF服务](#3.5.2 如何调用HSF服务)
   - [3.6 Tair](#3.6 Tair)
   - [3.7 iBatis](#3.7 iBatis)
+- [4. 链接整理](#4. 链接整理)
 
 ---
 
-<h1 id="月报-白隼" align="center">入职一个月月报-白隼</h1>
+<h1 id="月报-白隼" align="center">第一个月月报-白隼</h1>
 
 <h2 id="1. 引言">1. 引言</h2>
 
   入职已经近一个月，从入职前对Java的Web开发基本未了解过，到现在了解Spring架构的一部分知识，熟悉日常开发，项目上线，从中学到了不少东西，包括淘系的一些技术以及中间件。通过以月报的形式归纳总结，加深理解。同时给以后入职的同学一些参考。如有理解不到位或者不正确的地方，多谢指正。
 
 
-<h2 id="2. 环境相关">2. 环境相关</h2>
+<h2 id="2. 相关环境">2. 相关环境</h2>
 
 <h3 id="2.1 开发环境">2.1 开发环境</h3>
 
@@ -133,7 +134,7 @@ tags: []
 
 日志打在 __/home/admin/[应用名]/logs/__目录下。
 
-<h2 id="3. 技术相关">3. 技术相关</h2>
+<h2 id="3. 用到的技术">3. 用到的技术</h2>
 
 
 <h3 id="3.1 Maven">3.1 Maven</h3>
@@ -1501,3 +1502,57 @@ SQL Map API使用和mapped statement非常相似的结构,可以避免一系列i
 
 - \<isNotEmpty\> 检查Collection.size()的值，属性的String或String.valueOf()值,是否不为null或不为空（""或size() \> 0）。
 
+
+<h2 id="4. 链接整理">4. 链接整理</h2>
+
+- 数据工厂(修改数据库中用户相关) ： 
+
+> http://kelude.taobao.net/testdata/tds/search?q=%E7%94%A8%E6%88%B7&cat_type=td
+
+- B2C manage system
+
+> http://tmall.admin.taobao.org/seller/listSeller.htm
+
+- Aone项目管理：
+
+> http://aone.alibaba-inc.com/aone2/myaone
+
+- 天猫商家中心：
+
+> mai.daily.taobao.net	
+
+- 淘宝TSP：
+
+> http://sm.admin.taobao.org/myservice/home/index.htm#
+
+- CRM系统：
+
+> http://auth.admin.taobao.org/console/login.htm
+
+- 技术保障，运维（申请测试，日常，线上机帐户）：
+
+> http://aops.alibaba-inc.com/workflow/account/new/
+
+- IDB（数据库相关）：
+
+> http://idb.alibaba-inc.com/
+
+- 测试相关：
+
+> http://k.alibaba-inc.com/testsuites?version_id=1044675
+
+- 商家平台confluence：
+
+> http://confluence.taobao.ali.com/pages/viewpage.action?pageId=199486870
+
+- 小二后台审核品牌：
+
+> http://tmall.admin.taobao.org/brand/brandIndex.htm
+
+Bug提交地址：
+
+> http://k3.alibaba-inc.com/issue?versionId=1044675
+
+- 生成商家账号：
+
+> http://10.125.56.246:7001/bsellertest/
