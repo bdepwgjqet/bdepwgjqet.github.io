@@ -228,7 +228,7 @@ POM(Project Object Model,项目对象模型) 定义了项目的的基本信息�
 - groupId : 对于淘宝的项目来说，groupId 通常是产品线的代号，如
 com.taobao.uic，com.taobao.shopcenter 等，注意groupId 一定要保护产品线的信息，不要设置为com.taobao，这不便于划分项目。
 
-- artifactId : 这个是Maven项目中模块的名称标识，对于artifactId来说，通常需要包含产品线的名称，因为最终的jar名称通常为artifactId+version+”.jar”，如果artifactId名称非常普通，那么会导致jar文件名称冲突。这里还有一个问题就是目录名称和artifactId 是否要一样？实际的开发中，不需要一样。artifactId 包括产品线的前缀，如uic-client，如果uic-client属于项目中的一个模块，那么我们只需 要将目录名称设置为client，而不是uic-client，因为目录是在项目这个环境中，不需要添加前缀，加啦反而给理解造成困难。
+- artifactId : 这个是Maven项目中模块的名称标识，对于artifactId来说，通常需要包含产品线的名称，因为最终的jar名称通常为artifactId+version+".jar"，如果artifactId名称非常普通，那么会导致jar文件名称冲突。这里还有一个问题就是目录名称和artifactId 是否要一样？实际的开发中，不需要一样。artifactId 包括产品线的前缀，如uic-client，如果uic-client属于项目中的一个模块，那么我们只需 要将目录名称设置为client，而不是uic-client，因为目录是在项目这个环境中，不需要添加前缀，加啦反而给理解造成困难。
 
 - version : 项目的版本号,一般由三部分组成,如1.1.0.
 
@@ -272,7 +272,7 @@ __POM的依赖管理配置:__
 
 - system：和provided类似，但是provided scope依赖还是要从maven仓库中找的，而system scope不是从库中查找，需要开发人员指定.
 
-参考自:
+参考:
 
 > http://maven.apache.org/maven-model/maven.html
 
@@ -368,7 +368,7 @@ Spring 配置（可以使用XML或Java注解的方式）：
 
 - XML方式：在XML文件中<beans>标签内放置所有Spring配置信息，包括<bean>声明（beans不是唯一命名空间）。
 
-- Java注解的方式：
+- Java注解的方式 : 用java代替XML配置.
 
 Spring中装配bean的例子：
 
@@ -444,7 +444,7 @@ actioner.action();
 关于依赖注入：
 
 1.通过构造函数注入,用<constructor-arg>标签。
-上例Mike的其它信息可以用<constructor-arg>通过以下方式注入（该标签可以用ref引用其它bean）：
+上例Mike的其它信息可以用<constructor-arg>通过以下方式注入（或者用ref引用其它bean）：
 
 {% highlight XML linenos %}
 <bean id="Mike" class="com.springExample.Man">  
@@ -480,7 +480,7 @@ actioner.action();
 </bean>  
 {% endhighlight %}
 
-2.用setter方法注入，用<property>标签（可以用<ref bean>引用其它bean的值），例如下:
+2.用setter方法注入，用<property>标签（或者用\<ref bean\>引用其它bean的值），例如:
 
 {% highlight XML linenos %}
 <bean id="Mike" class="com.springExample.Man">  
@@ -884,6 +884,7 @@ Spring 2.5中NamedParameterJdbcTemplate所具备的命名参数功能被合并�
 <bean id="jdbcTemplate"
 	class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
 	<constructor-arg ref="dataSource" />
+</bean>
 ```
 
 这样便能让SimpleJdbcTemplate正常工作.
@@ -901,12 +902,12 @@ public class JdbcAppDAO implements appDAO {
 }
 ```
 
-装配JdbcSpitterDAO的jcbdTemplate属性:
+装配JdbcSpitterDAO的jdbcTemplate属性:
 
 ```XML
 <bean id="appDAO"
 	class="org.tec.app.JdbcAppDAO">
-	<property name="jdbcTemplate ref="jdbcTemplate" />
+	<property name="jdbcTemplate" ref="jdbcTemplate" />
 </bean>
 ```
 
@@ -1270,9 +1271,9 @@ __算法__
 
 tair的分布采用一致性哈希算法, 对于所有的key, 分到Q个桶中, 桶是负载均衡和数据迁移的基本单位. config server 根据一定的策略把每个桶指派到不同的data server上.
 
-单调性保证 : 一致性哈希算法同时将上述 __key__和 __桶__用哈希函数哈希,这样key和桶都位于哈希环上的某一个位置. 假设有Q个桶, 则哈希环被分成Q段, 只要将每个桶之前的一段key交给这个桶. 当我们增加一个桶时, 只会影响增加桶后面一个桶的key分配.其它桶不并会受到影响.
+- 单调性保证 : 一致性哈希算法同时将上述 __key__和 __桶__用哈希函数哈希,这样key和桶都位于哈希环上的某一个位置. 假设有Q个桶, 则哈希环被分成Q段, 只要将每个桶之前的一段key交给这个桶. 当我们增加一个桶时, 只会影响增加桶后面一个桶的key分配.其它桶不并会受到影响.
 
-均衡性 : 通过引入虚拟节点的方式,对每一个桶计算多个Hash值,选取这些Hash值中比较均匀分布的值作为虚拟节点,这样每个节点处理的Key便会相对比较均衡.
+- 均衡性 : 通过引入虚拟节点的方式,对每一个桶计算多个Hash值,选取这些Hash值中比较均匀分布的值作为虚拟节点,这样每个节点处理的Key便会相对比较均衡.
 
 __存储引擎__
 
@@ -1358,12 +1359,12 @@ SQL Map的核心概念是Mapped Statement。Mapped Statement可以使用任意�
 Mapped Statement的结构如下所示：
 
 ```XML
-<statement id=”statementName”
-	[parameterClass=”some.class.Name”]
-	[resultClass=”some.class.Name”]
-	[parameterMap=”nameOfParameterMap”]
-	[resultMap=”nameOfResultMap”]
-	[cacheModel=”nameOfCache”]
+<statement id="statementName"
+	[parameterClass="some.class.Name"]
+	[resultClass="some.class.Name"]
+	[parameterMap="nameOfParameterMap"]
+	[resultMap="nameOfResultMap"]
+	[cacheModel="nameOfCache"]
 >
 	select * from PRODUCT where PRD_ID = [?|#propertyName#]
 	order by [$simpleDynamic$]
@@ -1389,7 +1390,7 @@ statement类型:
 - __parameterClass__属性的值是Java类的全限定名（即包括类的包名）。parameterClass属性是可选的，但强烈建议使用。它的目的是限制输入参数的类型为指定的Java类，并优化框架的性能。如果您使用parameterMap，则没有必要使用parameterClass属性。例如，如果要只允许Java类examples.domain.Product作为输入参数，可以这样：
 
   ```XML
-<statement id=”statementName” parameterClass=” examples.domain.Product”>
+<statement id="statementName" parameterClass="examples.domain.Product">
 insert into PRODUCT values (#id#, #description#, #price#)
 </statement>
 ```
@@ -1399,7 +1400,7 @@ insert into PRODUCT values (#id#, #description#, #price#)
 - resultClass属性的值是Java类的全限定名（即包括类的包名）。resultClass属性可以让你指定一个Java类，根据ResultSetMetaData将其自动映射到JDBC的ResultSet。只要是Java Bean的属性名称和ResultSet的列名匹配，属性自动赋值给列值。这使得查询mapped statement变得很短。例如: 
 
   ```XML
-<statement id="getPerson" parameterClass=”int” resultClass="examples.domain.Person">
+<statement id="getPerson" parameterClass="int" resultClass="examples.domain.Person">
 	SELECT 
 		PER_ID as id,
 		PER_FIRST_NAME as firstName,
@@ -1419,26 +1420,26 @@ insert into PRODUCT values (#id#, #description#, #price#)
   ResultMap的结构:
 
   ```XML
-<resultMap id=”resultMapName” class=”some.domain.Class” [extends=”parent-resultMap”]>
-	<result property=”propertyName” column=”COLUMN_NAME”
-		[columnIndex=”1”] [javaType=”int”] [jdbcType=”NUMERIC”]
-		[nullValue=”-999999”] [select=”someOtherStatement”]
+<resultMap id="resultMapName" class="some.domain.Class" [extends="parent-resultMap"]>
+	<result property="propertyName" column="COLUMN_NAME"
+		[columnIndex="1"] [javaType="int"] [jdbcType="NUMERIC"]
+		[nullValue="-999999"] [select="someOtherStatement"]
 	/>
-	<result ……/>
-	<result ……/>
-	<result ……/>
+	<result .../>
+	<result .../>
+	<result .../>
 </resultMap>
 ```
 
   例子:
 
   ```XML
-<resultMap id=”get-product-result” class=”com.ibatis.example.Product”>
-	<result property=”id” column=”PRD_ID”/>
-	<result property=”description” column=”PRD_DESCRIPTION”/>
+<resultMap id="get-product-result" class="com.ibatis.example.Product">
+	<result property="id" column="PRD_ID"/>
+	<result property="description" column="PRD_DESCRIPTION"/>
 </resultMap>
 
-<statement id=”getProduct” resultMap=”get-product-result”>
+<statement id="getProduct" resultMap="get-product-result">
 	select * from PRODUCT
 </statement>
 ```
@@ -1496,7 +1497,7 @@ SQL Map API使用和mapped statement非常相似的结构,可以避免一系列i
 
 - \<isNotNull\> 检查属性是否不为null。
 
-- \<isEmpty\> 检查Collection.size()的值，属性的String或String.valueOf()值,是否为null或空（“”或size() \< 1）。
+- \<isEmpty\> 检查Collection.size()的值，属性的String或String.valueOf()值,是否为null或空（""或size() \< 1）。
 
-- \<isNotEmpty\> 检查Collection.size()的值，属性的String或String.valueOf()值,是否不为null或不为空（“”或size() \> 0）。
+- \<isNotEmpty\> 检查Collection.size()的值，属性的String或String.valueOf()值,是否不为null或不为空（""或size() \> 0）。
 
