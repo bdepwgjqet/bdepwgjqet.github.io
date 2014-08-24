@@ -1,3 +1,12 @@
+---
+layout: post
+title: "第一个月月报 白隼"
+description: ""
+category: 
+tags: []
+---
+{% include JB/setup %}
+
 
 > - [1. 引言](#1. 引言)
 - [2. 环境相关](#2. 环境相关)
@@ -1490,6 +1499,4 @@ SQL Map API使用和mapped statement非常相似的结构,可以避免一系列i
 - \<isEmpty\> 检查Collection.size()的值，属性的String或String.valueOf()值,是否为null或空（“”或size() \< 1）。
 
 - \<isNotEmpty\> 检查Collection.size()的值，属性的String或String.valueOf()值,是否不为null或不为空（“”或size() \> 0）。
-
-
 
