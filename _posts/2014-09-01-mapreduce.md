@@ -9,66 +9,64 @@ tags: []
 
 MapReduce大致流程 :
 
-1. 对输入数据源进行切片
+- 对输入数据源进行切片
 
-2. master调度worker执行map任务(一个worker负责一部分切片)
+- master调度worker执行map任务(一个worker负责一部分切片)
 
   - worker读取输入源片段
 
   - worker执行map任务,将任务输出保存在本地
 
-3. master调度worker执行reduce任务
+- master调度worker执行reduce任务
 
   - reduce worker读取map任务的输出作为reduce输入 
 
   - reduce worker执行map任务,将任务输出保存到HDFS
 
-Map源码如下:
+Mapper源码如下:
 
 {% highlight java linenos %}
-public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
-    private final static IntWritable one = new IntWritable(1);
-    private Text word = new Text();
+public class Mapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT> {
 
-	/**
-	 * Called once at the beginning of the task.
-	 */
-	protected void setup(Context context
-					   ) throws IOException, InterruptedException {
-	// NOTHING
-	}
+    /**
+     * Called once at the beginning of the task.
+     */
+    protected void setup(Context context
+    				   ) throws IOException, InterruptedException {
+    // NOTHING
+    }
          
-	/**
-	 * Called once for each key/value pair in the input split. Most applications
-	 * should override this, but the default is the identity function.
-	 */
-	@SuppressWarnings("unchecked")
-	protected void map(KEYIN key, VALUEIN value, 
-					   Context context) throws IOException, InterruptedException {
-	  context.write((KEYOUT) key, (VALUEOUT) value);
-	}
+    /**
+     * Called once for each key/value pair in the input split. Most applications
+     * should override this, but the default is the identity function.
+     */
+    @SuppressWarnings("unchecked")
+    protected void map(KEYIN key, VALUEIN value, 
+    				   Context context) throws IOException, InterruptedException {
+      context.write((KEYOUT) key, (VALUEOUT) value);
+    }
 
-	/**
-	 * Called once at the end of the task.
-	 */
-	protected void cleanup(Context context
-						   ) throws IOException, InterruptedException {
-	  // NOTHING
-	}
+    /**
+     * Called once at the end of the task.
+     */
+    protected void cleanup(Context context
+    					   ) throws IOException, InterruptedException {
+      // NOTHING
+    }
 
-	/**
-	 * Expert users can override this method for more complete control over the
-	 * execution of the Mapper.
-	 * @param context
-	 * @throws IOException
-	 */
-	public void run(Context context) throws IOException, InterruptedException {
-	  setup(context);
-	  while (context.nextKeyValue()) {
-		map(context.getCurrentKey(), context.getCurrentValue(), context);
-	  }
-	  cleanup(context);
-	}
+    /**
+     * Expert users can override this method for more complete control over the
+     * execution of the Mapper.
+     * @param context
+     * @throws IOException
+     */
+    public void run(Context context) throws IOException, InterruptedException {
+      setup(context);
+      while (context.nextKeyValue()) {
+    	map(context.getCurrentKey(), context.getCurrentValue(), context);
+      }
+      cleanup(context);
+    }
 } 
 {% endhighlight %}
 
