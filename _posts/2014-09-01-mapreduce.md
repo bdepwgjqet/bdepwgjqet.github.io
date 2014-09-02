@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MapReduce"
+title: "MapReduce笔记"
 description: ""
 category: 
 tags: []
@@ -165,3 +165,27 @@ Reduce输出过程 :
 - 和TaskTracker进行通信，TaskTracker和JobTracker进行通信，然后JobTracker返回commit的指令，Reduce进行commit，将临时结果文件重命名成最终的文件
 
 - kill掉其他的TaskAttempt
+
+一个MapReduce例子:
+
+需求: 
+
+- 输入 : 输入文件有两个字段, 第一个字段由多个词组组成,词之间用ASCII码0x02分割,第二个字段是一个时间戳,字段之间用ASCII码0x01分割. 输入给定一个整型参数,表示小时数.
+
+- 输出 : 统计时间戳在\{当前系统时间-输入小时数\}的时间戳之后的词出现的词频数, 并且按词频倒序输出.
+
+例如(假设现在系统时间戳为4600):
+
+- 输入 :
+
+> nice perfect nice za za za 1001
+> nice good 999
+
+参数为1(小时)
+
+- 输出 :
+
+> za 3
+> nice 2
+> perfect 1
+
