@@ -192,4 +192,184 @@ Reduce输出过程 :
 大致方法 : MapReduce的排序都是在Map端进行,因此可以起两个Job, 第一个Job进行词频统记,第二个Job以第一个Job的输出作为输入, 第二个Job在Map端进行key/value反转,这时会以value进行排序(重写comparator比较器),第二个Job在Reduce端再进行key/value反转,就能保证最后以value倒序输出.
 
 
+词频统计Map:
 
+{% highlight java linenos %}
+public class CountMap extends Mapper<LongWritable, Text, Text, IntWritable> {
+	private final static IntWritable one = new IntWritable(1);
+	private Text word = new Text();
+
+	@Override
+	public void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
+
+		String[] sline = value.toString().split(String.valueOf((char) 1));
+		String[] tline = sline[0].split(String.valueOf((char) 2));
+
+		try {
+			Date currentDate = new Date(System.currentTimeMillis());
+			long curDate = currentDate.getTime();
+			long timeStamp = Long.parseLong(sline[sline.length - 1]);
+
+			Configuration conf = context.getConfiguration();
+			long preTimeTag = Long.parseLong(conf.get("preTimeTag"));
+			long preTime = preTimeTag * 3600 * 1000;
+
+			if (timeStamp >= curDate - preTime) {
+				for (int i = 0; i < tline.length; i++) {
+					word.set(tline[i]);
+					context.write(word, one);
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("CountMap err");
+		}
+
+	}
+}
+{% endhighlight %}
+
+词频统计Reduce:
+
+{% highlight java linenos %}
+public class CountReduce extends Reducer<Text, IntWritable, Text, IntWritable> {
+
+	@Override
+	public void reduce(Text key, Iterable<IntWritable> values, Context context)
+			throws IOException, InterruptedException {
+		int sum = 0;
+		for (IntWritable val : values) {
+			sum += val.get();
+		}
+		context.write(key, new IntWritable(sum));
+	}
+}
+{% endhighlight %}
+
+反转value/key Map:
+
+{% highlight java linenos %}
+public class SortMap extends Mapper<LongWritable, Text, IntWritable, Text> {
+	IntWritable mapKey = new IntWritable();
+	private Text mapValue = new Text();
+
+	@Override
+	public void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
+
+		String[] sline = value.toString().split(String.valueOf('\t'));
+
+		try {
+			mapKey.set(Integer.parseInt(sline[1]));
+			mapValue.set(sline[0]);
+			context.write(mapKey, mapValue);
+
+		} catch (Exception e) {
+			System.err.println("SortMap err");
+		}
+	}
+}
+{% endhighlight %}
+
+
+反转value/key Reduce:
+
+{% highlight java linenos %}
+public class SortReduce extends Reducer<IntWritable, Text, Text, IntWritable> {
+
+	@Override
+	public void reduce(IntWritable key, Iterable<Text> values, Context context)
+			throws IOException, InterruptedException {
+		for (Text text : values) {
+			context.write(text, key);
+		}
+	}
+}
+{% endhighlight %}
+
+比较器实现:
+
+{% highlight java linenos %}
+public class DescendingIntComparable extends WritableComparator {
+
+	public DescendingIntComparable() {
+		super(IntWritable.class);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public int compare(WritableComparable a, WritableComparable b) {
+		return super.compare(a, b) * (-1);
+	}
+
+	@Override
+	public int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {
+
+		Integer v1 = ByteBuffer.wrap(b1, s1, l1).getInt();
+		Integer v2 = ByteBuffer.wrap(b2, s2, l2).getInt();
+
+		return v1.compareTo(v2) * (-1);
+	}
+
+}
+{% endhighlight %}
+
+最后的主程序:
+{% highlight java linenos %}
+public class WordCount {
+
+	public static int run(String[] args) throws Exception {
+		Configuration conf = new Configuration();
+		conf.set("preTimeTag", args[2]);
+
+		Path tmpDir = new Path(new String("wordcount-tmpdir-"
+				+ System.currentTimeMillis()));
+
+		Job job = new Job(conf, "word count");
+
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(IntWritable.class);
+
+		job.setMapperClass(CountMap.class);
+		job.setReducerClass(CountReduce.class);
+
+		job.setInputFormatClass(TextInputFormat.class);
+		job.setOutputFormatClass(TextOutputFormat.class);
+
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job, tmpDir);
+
+		job.waitForCompletion(true);
+
+		Job sortJob = new Job(conf, "count sort");
+
+		sortJob.setOutputKeyClass(IntWritable.class);
+		sortJob.setOutputValueClass(Text.class);
+
+		sortJob.setMapperClass(SortMap.class);
+		sortJob.setReducerClass(SortReduce.class);
+
+		sortJob.setInputFormatClass(TextInputFormat.class);
+		sortJob.setOutputFormatClass(TextOutputFormat.class);
+
+		sortJob.setSortComparatorClass(DescendingIntComparable.class);
+
+		FileInputFormat.addInputPath(sortJob, tmpDir);
+		FileOutputFormat.setOutputPath(sortJob, new Path(args[1]));
+
+		sortJob.waitForCompletion(true);
+
+		return 0;
+	}
+
+	public static void main(String[] args) throws Exception {
+		if (args.length != 3) {
+			System.err.println("err Parameters : input output prehours");
+			System.exit(-1);
+		}
+
+		int exitRes = run(args);
+		System.exit(exitRes);
+	}
+}
+{% endhighlight %}
