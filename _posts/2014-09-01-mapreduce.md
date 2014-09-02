@@ -189,3 +189,7 @@ Reduce输出过程 :
 > nice 2
 > perfect 1
 
+大致方法 : MapReduce的排序都是在Map端进行,因此可以起两个Job, 第一个Job进行词频统记,第二个Job以第一个Job的输出作为输入, 第二个Job在Map端进行key/value反转,这时会以value进行排序(重写comparator比较器),第二个Job在Reduce端再进行key/value反转,就能保证最后以value倒序输出.
+
+
+
