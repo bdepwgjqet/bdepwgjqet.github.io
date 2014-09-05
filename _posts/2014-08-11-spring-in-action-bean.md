@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring in Action 笔记（一、bean相关）"
+title: "Spring in Action 笔记（一、Bean相关）"
 description: ""
 category: 
 tags: []
