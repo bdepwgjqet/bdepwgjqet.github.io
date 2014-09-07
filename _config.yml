@@ -76,7 +76,7 @@ JB :
   #
   archive_path: /index.html
   tags_path : /tags.html
-  ride_path : /ride.html
+  cycling_path : /cycling.html
   atom_path : /atom.xml
   rss_path : /rss.xml
 
