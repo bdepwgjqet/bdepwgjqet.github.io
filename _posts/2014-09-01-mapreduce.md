@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MapReduce笔记"
+title: "MapReduce notes"
 description: ""
 category: 
 tags: []
