@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "shell 笔记持续更新"
+title: "shell notes"
 description: ""
 category: 
 tags: []
