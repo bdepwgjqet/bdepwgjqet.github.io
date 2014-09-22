@@ -46,7 +46,7 @@ public void saveData(Data data) {
 先将TransactionTemplate注入到SpiterServiceImpl中
 
 ```XML
-<bean id="spiterService class="com.habuma.spitter.service.SpitterServiceImpl">
+<bean id="spiterService" class="com.habuma.spitter.service.SpitterServiceImpl">
     ...
     <property name="transactionTemplate">
         <bean class="org.springframework.transaction.support.TransactionTemplate">
