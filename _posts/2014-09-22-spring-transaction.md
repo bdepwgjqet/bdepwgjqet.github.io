@@ -53,6 +53,7 @@ public void saveData(Data data) {
             <property name="transactionManager" ref="transactionManager" />
         </bean>
     <property>
+</bean>
 ```
 
 实现TransactionCallBack接口,该接口只要实现doInTransaction方法.
