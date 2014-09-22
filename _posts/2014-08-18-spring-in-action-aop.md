@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring in Action 笔记（二、AOP相关）"
+title: "Spring in Action notes : AOP"
 description: ""
 category: 
 tags: []

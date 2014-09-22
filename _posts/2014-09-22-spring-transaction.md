@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Spring in Action notes : Transaction"
+description: ""
+category: 
+tags: []
+---
+{% include JB/setup %}
+
 __事务__
 
 - 定义 : 事务是全有或全无的操作,事务将几个操作组合成一个要么全部发生要么全部不发生的工作单元.(把完成一件事的几个步骤包装起来,要么全部步骤都完成,要么都不完成)
@@ -63,4 +72,3 @@ public void saveData(final Data data) {
     });
 }
 ```
-

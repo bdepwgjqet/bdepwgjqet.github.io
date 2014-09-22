@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring in Action 笔记(三、DB相关) && iBatis"
+title: "Spring in Action notes : DB && iBatis"
 description: ""
 category: 
 tags: []
