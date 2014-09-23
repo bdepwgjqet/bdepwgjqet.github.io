@@ -6,4 +6,28 @@
 
  - 接口与接口可以继承，允许多继承。
 
-- String.toLowerCase :  不会影响中文。
+- String
+
+ - String.toLowerCase :  不会影响中文。
+
+ - StringUtils.isEmpty(String str) 判断String是否为null或str.length=0
+
+- Map
+
+ - Map.Entry当作C++中的Pair使用 : Map.Entry<String, Integer> pair = new AbstractMap.SimpleEntry("abc", 1);
+
+-Arrays
+
+ - Arrays.asList(T[]) 将数组转成list
+
+- Spring
+
+ - @Resource注入查找的是配置中的bean, bean中property属性调用的是set方法, 不能用@Resource
+
+- IntelliJ IDEA
+
+ - ideaVim
+
+- Eclipse
+
+ - vrapper
