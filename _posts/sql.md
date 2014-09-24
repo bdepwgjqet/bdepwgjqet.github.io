@@ -1,0 +1,1 @@
+- 查看创建表的sql语句(包含编码信息) : show create table [表名]

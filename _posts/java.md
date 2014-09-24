@@ -16,7 +16,7 @@
 
  - Map.Entry当作C++中的Pair使用 : Map.Entry<String, Integer> pair = new AbstractMap.SimpleEntry("abc", 1);
 
--Arrays
+- Arrays
 
  - Arrays.asList(T[]) 将数组转成list
 
