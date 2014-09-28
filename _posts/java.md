@@ -12,6 +12,8 @@
 
  - StringUtils.isEmpty(String str) 判断String是否为null或str.length=0
 
+ - StringUtils.isBlank(String str) 判断String是否为一个或多个空格符或str.length=0. PS : str=null时会抛出异常.
+
 - Map
 
  - Map.Entry当作C++中的Pair使用 : Map.Entry<String, Integer> pair = new AbstractMap.SimpleEntry("abc", 1);

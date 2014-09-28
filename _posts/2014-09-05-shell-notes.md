@@ -89,3 +89,30 @@ source(点命令)可以把文件中的命令在当前终端顺序执行
 - 用于重新执行刚修改的初始化文件
 
 - 执行cd到某个目录的shell脚本, 若不使用source命令直接执行脚本, 这样执行终端会产生一个子shell, 子shell执行完脚本, 子shell中切换了目录, 子shell执行完后变量和操作都会被全部回收, 终端上的路径就不会被改变.使用source命令可以达到这一目的.
+
+
+__grep__
+
+grep的格式如下:
+
+```bash
+grep [OPTIONS] PATTERN [FILE...]
+```
+
+OPTION中常用的:
+
+- -r(recursive) : 递归查找子目录(基本shell命令通用)
+
+- -v : 不匹配的
+
+- -n : 显示查找东西所在的行号
+
+- --exclude : 排除查找的文件
+
+- -i : 忽略大小写
+
+一个粟子:
+
+```bash
+grep -rn --exclude=*.{iml,ipr,iws} "\-SNAPSHOT" ./
+```
