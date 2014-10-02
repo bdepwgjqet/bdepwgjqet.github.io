@@ -16,7 +16,7 @@
 
 - Map
 
- - Map.Entry当作C++中的Pair使用 : Map.Entry<String, Integer> pair = new AbstractMap.SimpleEntry("abc", 1);
+ - Map.Entry当作C++中的Pair使用 : Map.Entry<String, Integer> pair = new AbstractMap.SimpleEntry<String,Integer>("abc", 1);
 
 - Arrays
 
