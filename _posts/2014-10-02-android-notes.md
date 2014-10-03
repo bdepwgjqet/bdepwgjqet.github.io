@@ -45,4 +45,18 @@ __动作__
 
 在主Action类中增加__public void__方法sendMessage(View view),点击按钮后会执行该方法.
 
+使用Intent启动另一个Action
+
+```java
+public void sendMessage(View view) {
+    Intent intent = new Intent(this, DisplayMessageActivity.class);
+    EditText editText = (EditText) findViewById(R.id.edit_message);
+    String message = editText.getText().toString();
+    intent.putExtra(EXTRA_MESSAGE, message);
+    startActivity(intent);
+}
+```
+
+Intent相当于两个Action的粘合剂, 能把前一个Action压栈, 前往另一个Action. 用putExtra方法以K/V的形式在两个Action中传递信息.
+
 
