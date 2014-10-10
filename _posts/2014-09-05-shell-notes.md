@@ -111,8 +111,30 @@ OPTION中常用的:
 
 - -i : 忽略大小写
 
+- -An : 显示后(after) n行
+
+- -Bn : 显示前(before) n行
+
 一个粟子:
 
 ```bash
-grep -rn --exclude=*.{iml,ipr,iws} "\-SNAPSHOT" ./
+grep -rn -B1 -A1 --exclude=*.{iml,ipr,iws} "\-SNAPSHOT" ./
 ```
+
+__PS1环境变量__
+
+PS1是用于设置命令提示符的环境变量
+
+- \d : 表示日期
+
+- \t : 表示时间 HH:mm:ss
+
+- \u : 当前用户名称
+
+- \h : 主机名称中第一个'.'之前的部分
+
+- \H : 完整主机名称
+
+一个可以定制自己PS1的网站:
+
+> https://www.kirsle.net/wizards/ps1.html 
