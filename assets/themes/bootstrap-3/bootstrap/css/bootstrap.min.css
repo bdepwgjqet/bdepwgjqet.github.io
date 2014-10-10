@@ -397,7 +397,7 @@ ul,ol {
 ul ul,ol ul,ul ol,ol ol {
 	margin-bottom:0
 }
-.posts {
+.wrapper {
     background: none repeat scroll 0 0 rgba(253, 253, 253, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.17);
     box-shadow: 0 1px 10px rgba(170, 170, 170, 0.8);
