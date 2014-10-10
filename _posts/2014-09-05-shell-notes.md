@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "shell notes"
+title: "Shell notes"
 description: ""
 category: 
 tags: []

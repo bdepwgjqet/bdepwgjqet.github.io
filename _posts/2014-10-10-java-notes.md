@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "java notes"
+title: "Java notes"
 description: ""
 category: 
 tags: []
