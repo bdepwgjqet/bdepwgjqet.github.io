@@ -402,7 +402,8 @@ ul.clear-style {
     margin:0;
 }
 li.float-left {
-    float:left
+    float:left;
+    margin:10px;
 }
 ul ul,ol ul,ul ol,ol ol {
 	margin-bottom:0
