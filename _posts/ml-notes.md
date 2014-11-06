@@ -16,8 +16,13 @@ Supervised learning
 
  - Ordinary Least Squares (最小二乘)
 
-  - $$E=mc^2$$ min(sum(sqrt(Xw-y))), w=inverse(X)Y
+  - min(sum(squares(Xw-y))), w=inverse(X)Y
 
   - sklearn.linear_model.LinearRegression()
 
  - Ridge Regression (岭回归)
+ 
+  - min(sum(squares(Xw-y)+squares(Rw)))
+
+  - w=inverse(transport(X)*X+transport(R)*R)*transport(X)Y
+
