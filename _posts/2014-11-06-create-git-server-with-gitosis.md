@@ -7,8 +7,6 @@ tags: []
 ---
 {% include JB/setup %}
 
-# 虚拟机中搭建Git服务器Gitosis
-
 Git是目前非常流行的分布式版本控制系统, 目前比较火的[Github](https://github.com/)就是一个基于Git的代码管理平台, Github提供免费托管公共仓库的功能, 而私密仓库的功能需要收费. 于是就折腾了一下在虚拟机中搭建了Git-Gitosis用来管理个人代码.
 
 Git支持四种协议来传输数据 : SSH协议, Git协议, HTTP协议, 本地传输. 我选择了用SSH协议.
@@ -31,7 +29,7 @@ archlinux在AUR中有Gitosis
 ~$ yaourt gitosis
 ```
 
-安装完成后先在当前用户下生成ssh公钥,利用该公钥初始化gitosis
+安装完成后先在当前用户下生成ssh公钥((Arch上ssh-key的wiki)[http://en.wikipedia.org/wiki/Ssh-keygen]),利用该公钥初始化gitosis
 
 ```bash
 ssh-keygen -t rsa
@@ -144,7 +142,7 @@ writable = test-example
 
 假设之前test-example中允许读写的用户bdepwgjqet@Arch是宿主机中的一个用户
 
-这时要先在宿主机中用bdepwgjqet@Arch用户生成一个rsa公钥(上文中的id_rsa.pub), 将该公钥中的内容保存到虚拟机中gitosis-admin.git的keydir下, 变成如下
+这时要先在宿主机中用bdepwgjqet@Arch用户生成一个rsa公钥(上文中的id_rsa.pub), 将该公钥中的内容保存到虚拟机中gitosis-admin.git的keydir下, 文件结构变成如下
 
 ```bash
 .
