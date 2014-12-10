@@ -29,7 +29,7 @@ archlinux在AUR中有Gitosis
 ~$ yaourt gitosis
 ```
 
-安装完成后先在当前用户下生成ssh公钥((Arch上ssh-key的wiki)[http://en.wikipedia.org/wiki/Ssh-keygen]),利用该公钥初始化gitosis
+安装完成后先在当前用户下生成ssh公钥([Arch上ssh-key的wiki](http://en.wikipedia.org/wiki/Ssh-keygen)),利用该公钥初始化gitosis
 
 ```bash
 ssh-keygen -t rsa
