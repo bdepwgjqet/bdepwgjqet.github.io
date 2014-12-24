@@ -19,6 +19,8 @@ __Map__
 
 - Map.Entry当作C++中的Pair使用 : Map.Entry<String, Integer> pair = new AbstractMap.SimpleEntry<String,Integer>("abc", 1);
 
+- TreeMap.tailMap(K fromKey)返回TreeMap中大于等于fromKey的部份.
+
 __Arrays__
 
 - Arrays.asList(T[]) 将数组转成list
