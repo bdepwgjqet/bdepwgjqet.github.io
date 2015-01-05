@@ -21,6 +21,8 @@ __Map__
 
 - TreeMap.tailMap(K fromKey)返回TreeMap中大于等于fromKey的部份.
 
+- TreeMap.ceilingKey(K fromKey)返回TreeMap中大于等于fromKey的key.
+
 __Arrays__
 
 - Arrays.asList(T[]) 将数组转成list
